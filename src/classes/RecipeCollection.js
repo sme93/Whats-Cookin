@@ -5,13 +5,31 @@ class RecipeCollection {
   }
 
   filterByTag(searchTag) {
-    const formatTag = searchTag.toLowerCase();
-    return this.recipes.filter(recipe => {
-      return recipe.tags.filter(tag => {
-        return tag.includes(formatTag)
-      })
-    })
+    const recipesWithTag = this.recipes.reduce((searchedRecipes, recipe) => {
+      if (recipe.name.toLowerCase().includes(searchTag.toLowerCase()) ||
+      recipe.tags.includes(searchTag.toLowerCase())) {
+        searchedRecipes.push(recipe);
+      }
+      return searchedRecipes;
+    }, [])
+    return recipesWithTag;
   }
+
+
+    findRecipe(searchText){
+      let searchResult = this.recipesData.reduce((searchedRecipes, recipe) => {
+        if (recipe.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        recipe.tags.includes(searchText.toLowerCase())) {
+          searchedRecipes.push(recipe);
+        }
+        return searchedRecipes;
+      }, [])
+      return searchResult;
+    }
+
+
+
+
 
   findRecipe(searchText) {
     const formatSearch = searchText.toLowerCase()
