@@ -24,8 +24,7 @@ describe('Recipe', () => {
     expect(recipe.image).to.equal(recipeData[0].image);
   });
 
-  it.only('should store its ingredients', () => {
-    console.log(recipe.ingredients);
+  it('should store its ingredients', () => {
     expect(recipe.ingredients).to.equal(recipeData[0].ingredients);
   });
 
@@ -42,21 +41,31 @@ describe('Recipe', () => {
   });
 
   it('should be able to calulate the cost of a recipe', () => {
-    const recipeCost = recipe.calculateCost();
+    const recipeCost = recipe.calculateCost(ingredientsData);
 
-    expect(recipeCost).to.equal();
+    expect(recipeCost).to.equal('$59.21');
   });
 
   it('should be able to return what ingredients are needed', () => {
-    const returnedIngredients = recipe.returnIngredients();
+    const returnedIngredients = recipe.returnIngredients(ingredientsData);
 
-    expect(returnedIngredients).to.deep.equal();
+    expect(returnedIngredients[0]).to.deep.equal({
+      id: 20081,
+      name: 'wheat flour',
+      estimatedCostInCents: 142,
+      quantity: { amount: 1.5, unit: 'c' }
+    });
   });
 
   it('should be able to return the instructions to the recipe', () => {
     const recipeInstructions = recipe.returnInstructions();
 
-    expect(recipeInstructions).to.equal();
+    expect(recipeInstructions).to.contain('1. In a large mixing bowl,');
   });
 
+  it('should be able to return the instructions as one string', () => {
+    const recipeInstructions = recipe.returnInstructions();
+
+    expect(recipeInstructions).to.contain(' 350 degrees.. 4. Place the cookie');
+  });
 });    
