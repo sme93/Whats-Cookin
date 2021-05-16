@@ -1,17 +1,17 @@
 ## 🚨🤦🏽🚨 *Problem:*
- <!-- What is the purpose of this PR? Bug? Refactor? Feature? Please describe the problem you're trying to solve -->
+ <!-- what is the purpose of this PR? Bug? Refactor? Feature? Please describe the problem you're trying to solve -->
 -
 
 ## 🌟💡🌟 *Solution:*
-<!-- How are you solving this simply and elegantly? -->
+<!-- how are you solving this simply and elegantly? -->
 -
 
 ## 🤔💬🤔 *Test/Review Plan:*
-<!-- What's your proof this works? Unit tests? Staging? If you want reviewer to click-test, include specific instructions -->
+<!-- what's your proof this works? Unit tests? Staging? If you want reviewer to click-test, include specific instructions -->
 -
 
 ## 👁‍👁‍ *Changes:*
- <!-- What was the upfront planning that went into this? -->
+ <!-- what was the upfront planning that went into this? -->
 - [ ] Bug fix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)  
