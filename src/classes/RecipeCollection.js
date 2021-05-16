@@ -1,6 +1,6 @@
 class RecipeCollection {
   constructor(recipeData) {
-    this.recipes = [recipeData];
+    this.recipes = recipeData;
   }
 
   filterByTag(searchTag) {

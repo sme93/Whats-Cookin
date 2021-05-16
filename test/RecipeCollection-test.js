@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 
 import { recipeData } from '../src/data/recipes.js';
-import { ingredientsData } from '../src/data/ingredients.js';
 import RecipeCollection from '../src/classes/RecipeCollection';
 
 let recipeCollection;
@@ -15,12 +14,12 @@ describe('Recipe Collection', () => {
     expect(RecipeCollection).to.be.a('function');
   });
 
-  it('Should take in recipe data and store in an array', () => {
+  it('Should store recipe data', () => {
     expect(recipeCollection.recipes).to.be.an('array')
   });
 
   it('Should filter recipes by one or more tags', () => {
-    expect(recipeCollection.filterByTag('snack').length).to.equal(9)
+    expect(recipeCollection.filterByTag('antipasti').length).to.equal(9)
   });
 
   it('Should filter recipes based on an ingredient', () => {
