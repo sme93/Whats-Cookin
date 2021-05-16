@@ -1,6 +1,7 @@
 class RecipeCollection {
-  constructor(recipeData) {
-    this.recipes = recipeData;
+  constructor(allRecipes, allIngredients) {
+    this.recipes = allRecipes;
+    this.ingredients = allIngredients;
   }
 
   filterByTag(searchTag) {
@@ -15,9 +16,9 @@ class RecipeCollection {
   findRecipe(searchText) {
     const formatSearch = searchText.toLowerCase()
     return this.recipes.filter(recipe => {
-        return recipe.ingredients.filter(ingredient => {
-          return ingredient.name.toLowerCase().includes(formatSearch) ||
-            recipe.name.toLowerCase().includes(formatSearch)
+        return this.ingredients.filter(ingredient => {
+          return ingredient.name.includes(formatSearch) ||
+            recipe.name.includes(formatSearch)
         });
       });
     }

@@ -1,13 +1,14 @@
 import { expect } from 'chai';
 
 import { recipeData } from '../src/data/recipes.js';
+import { ingredientsData } from '../src/data/ingredients.js';
 import RecipeCollection from '../src/classes/RecipeCollection';
 
 let recipeCollection;
 
 describe('Recipe Collection', () => {
   beforeEach(() => {
-  recipeCollection = new RecipeCollection(recipeData);
+  recipeCollection = new RecipeCollection(recipeData, ingredientsData);
   });
 
   it('Should be a function', () => {
@@ -33,7 +34,7 @@ describe('Recipe Collection', () => {
 })
 
 
-// eggs 1123
+
 // A RecipeRepository should hold onto all Recipe objects.
 //
 // It should have a parameter to take in recipe data.
