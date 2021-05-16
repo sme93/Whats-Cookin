@@ -1,13 +1,16 @@
 ### 🚨🤦🏽🚨 *Problem:*
 *What is the purpose of this PR? Bug? Refactor? Feature? Please describe the problem you're trying to solve*
+
 -
 
 ### 🌟💡🌟 *Solution:*
 *How are you solving this simply and elegantly?*
+
 -
 
 ### 🤔💬🤔 *Test/Review Plan:*
 *What's your proof this works? Unit tests? Staging? If you want reviewer to click-test, include specific instructions*
+
 -
 
 ### 👁‍👁‍ *Changes:*
