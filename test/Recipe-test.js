@@ -8,15 +8,15 @@ let recipe;
 
 
 describe('Recipe', () => {
-    beforeEach(() => {
-    recipe = new Recipe(recipeData[0], ingredientsData);
+  beforeEach(() => {
+    recipe = new Recipe(recipeData[0]);
   });
 
   it('should be an instance of Recipe', () => {
     expect(recipe).to.be.an.instanceOf(Recipe);
   });
 
-  it.only('should store its id', () => {
+  it('should store its id', () => {
     expect(recipe.id).to.equal(recipeData[0].id);
   });
   
@@ -24,7 +24,8 @@ describe('Recipe', () => {
     expect(recipe.image).to.equal(recipeData[0].image);
   });
 
-  it('should store its ingredients', () => {
+  it.only('should store its ingredients', () => {
+    console.log(recipe.ingredients);
     expect(recipe.ingredients).to.equal(recipeData[0].ingredients);
   });
 
@@ -38,10 +39,6 @@ describe('Recipe', () => {
 
   it('should store its tags', () => {
     expect(recipe.tags).to.equal(recipeData[0].tags);
-  });
-
-  it('should store its ingredients data', () => {
-    expect(recipe.ingredientsData).to.deep.equal(ingredientsData);
   });
 
   it('should be able to calulate the cost of a recipe', () => {
