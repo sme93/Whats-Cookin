@@ -2,8 +2,6 @@ import { expect } from 'chai';
 
 import User from '../src/classes/User';
 import { recipeData } from '../src/data/recipes';
-import { ingredientsData } from '../src/data/ingredients';
-import Recipe from '../src/classes/Recipe';
 
 let user;
 
@@ -58,8 +56,8 @@ describe('User', () => {
 
   describe('filtering and searching favorited recipes', () => {
     beforeEach(() => {
-      user.addToFavorites(new Recipe(recipeData[0]));
-      user.addToFavorites(new Recipe(recipeData[1]));
+      user.addToFavorites(recipeData[0]);
+      user.addToFavorites(recipeData[1]);
     });
 
     it('should be able to filter through favoriteRecipes by tag', () => {
@@ -75,9 +73,5 @@ describe('User', () => {
               without regard to capitalization`, () => {
       expect(user.findFavorites('PUDDING')).to.deep.equal([recipeData[0]]);
     });
-
-    // it.only('should be able to search favoriteRecipes by ingredient', () => {
-    //   expect(user.findFavorites('apples')).to.deep.equal([recipeData[1]]);
-    // });
   });
 });
