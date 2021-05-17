@@ -20,16 +20,16 @@ describe('Recipe Collection', () => {
   });
 
   it('Should filter recipes by one or more tags', () => {
-    expect(recipeCollection.filterByTag('antipasti').length).to.equal(9)
+    expect(recipeCollection.filterRecipe('antipasti').length).to.equal(9)
+  });
+
+  it('Should filter recipes based on name', () => {
+    expect(recipeCollection.filterRecipe('Ambrosia Cupcakes').length).to.equal(1);
   });
 
   it('Should filter recipes based on an ingredient', () => {
     expect(recipeCollection.findRecipe('eggs').length).to.equal(13);
   });
-
-  it('Should filter recipes based on name', () => {
-   expect(recipeCollection.findRecipe('Ambrosia Cupcakes').length).to.equal(1);
- });
 
 })
 

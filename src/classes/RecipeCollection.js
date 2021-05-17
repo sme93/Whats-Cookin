@@ -4,42 +4,45 @@ class RecipeCollection {
     this.ingredients = allIngredients;
   }
 
-  filterByTag(searchTag) {
-    const recipesWithTag = this.recipes.reduce((searchedRecipes, recipe) => {
-      if (recipe.name.toLowerCase().includes(searchTag.toLowerCase()) ||
-      recipe.tags.includes(searchTag.toLowerCase())) {
+  filterRecipe(searchInput) {
+    const recipeMatches = this.recipes.reduce((searchedRecipes, recipe) => {
+      if (recipe.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+      recipe.tags.includes(searchInput.toLowerCase()) ||
+      recipe.ingredients.includes(searchInput.toLowerCase())) {
         searchedRecipes.push(recipe);
       }
       return searchedRecipes;
     }, [])
-    return recipesWithTag;
+    return recipeMatches;
   }
 
-
-    findRecipe(searchText){
-      let searchResult = this.recipesData.reduce((searchedRecipes, recipe) => {
-        if (recipe.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        recipe.tags.includes(searchText.toLowerCase())) {
-          searchedRecipes.push(recipe);
-        }
-        return searchedRecipes;
-      }, [])
-      return searchResult;
-    }
-
-
-
-
-
-  findRecipe(searchText) {
-    const formatSearch = searchText.toLowerCase()
-    return this.recipes.filter(recipe => {
-        return this.ingredients.filter(ingredient => {
-          return ingredient.name.includes(formatSearch) ||
-            recipe.name.includes(formatSearch)
-        });
+//Finding the ingredient in ingredientData that matches the ingredient input
+  findRecipe(ingredientInput) {
+    const ingredientMatch = this.ingredients.find(ingredient => {
+     if(ingredient.name === ingredientInput.toLowerCase()){
+       return ingredient
+     }
+     });
+    console.log(ingredientMatch)
+//im getting an error that recipes.ingredients.id.includes is not a function -- not sure if Im accessing this wrong??
+    const recipesWithIngredient = this.recipes.filter(recipe => {
+      return recipe.ingredients.id.includes(ingredientMatch.id)
       });
-    }
+
+    return recipesWithIngredient
   }
+}
+
+// recipeData = {
+//   "id": 595736,
+//   "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
+//   "ingredients": [
+//     {
+//       "id": 20081,
+//       "quantity": {
+//         "amount": 1.5,
+//         "unit": "c"
+//       }
+//     }
 
   export default RecipeCollection;
