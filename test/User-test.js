@@ -2,12 +2,14 @@ import { expect } from 'chai';
 
 import User from '../src/classes/User';
 import { recipeData } from '../src/data/recipes';
+import { ingredientsData } from '../src/data/ingredients';
+import Recipe from '../src/classes/Recipe';
 
 let user;
 
 describe('User', () => {
   beforeEach(() => {
-    user = new User(1, 'Rosemary');
+    user = new User('Rosemary', 1);
   });
 
   it('should be an instance of User', () => {
@@ -27,9 +29,9 @@ describe('User', () => {
   });
 
   it('should be able to add recipes to favoriteRecipes', () => {
-    const newFavoriteRecipe = user.addToFavorites(recipeData[0]);
+    user.addToFavorites(recipeData[0]);
 
-    expect(newFavoriteRecipe).to.deep.equal(recipeData[0]);
+    expect(user.favoriteRecipes).to.deep.equal([recipeData[0]]);
   });
 
   it('should be able to remove recipes from favoriteRecipes', () => {
@@ -56,12 +58,12 @@ describe('User', () => {
 
   describe('filtering and searching favorited recipes', () => {
     beforeEach(() => {
-      user.addToFavorites(recipeData[0]);
-      user.addToFavorites(recipeData[1]);
+      user.addToFavorites(new Recipe(recipeData[0]));
+      user.addToFavorites(new Recipe(recipeData[1]));
     });
 
     it('should be able to filter through favoriteRecipes by tag', () => {
-      expect(user.filterByTag('snack', recipeData))
+      expect(user.filterByTag('snack'))
         .to.deep.equal([recipeData[0]]);
     });
   
@@ -74,8 +76,8 @@ describe('User', () => {
       expect(user.findFavorites('PUDDING')).to.deep.equal([recipeData[0]]);
     });
 
-    it('should be able to search favoriteRecipes by ingredient', () => {
-      expect(user.findFavorites('apples')).to.deep.equal([recipeData[1]]);
-    });
+    // it.only('should be able to search favoriteRecipes by ingredient', () => {
+    //   expect(user.findFavorites('apples')).to.deep.equal([recipeData[1]]);
+    // });
   });
 });
