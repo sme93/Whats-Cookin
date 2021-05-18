@@ -82,7 +82,7 @@ describe('User', () => {
     });
 
     it('should be able to search favoriteRecipes by ingredient', () => {
-      expect(user.findFavorites('apple')).to.deep.equal([recipeData[1]]);
+      expect(user.findFavorites('apple slices')).to.deep.equal([recipeData[1]]);
     });
   });
 });
