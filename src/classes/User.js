@@ -26,18 +26,40 @@ class User {
     }
   }
 
+  //const mockTagsArray = ['snack', 'dessert']
+  //const mockFavRecipe = [
+  //   {id: 1, tags: ['snack']}, 
+  //   {id: 2, tags: ['dessert']}
+  //   {id: 3, tags: ['not a tag']}
+  // ]
+
   filterByTag(tag) {
     return this.favoriteRecipes.filter(recipe => {
       return recipe.tags.includes(tag);
     });
   }
 
-  findFavorites(name) {
-    const newSearchText = name.toLowerCase();
+  findFavorites(nameOrIngredient) {
+    const newSearchText = nameOrIngredient.toLowerCase();
     return this.favoriteRecipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(newSearchText)
+      console.log("recipe ", recipe);
+      const stringifiedInstructions = recipe.instructions.map(item => {
+        return item.instruction;
+      }).join(' ').toLowerCase();
+      
+      return recipe.name.toLowerCase().includes(newSearchText) || 
+        stringifiedInstructions.includes(newSearchText)
     });
   }
 }
 
 export default User;
+
+
+// [
+//   { name: "jane", id: 4},
+//   { name: "jack", id: 42}
+// ]
+
+// ["jane", "jack"]
+

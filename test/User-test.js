@@ -73,5 +73,9 @@ describe('User', () => {
               without regard to capitalization`, () => {
       expect(user.findFavorites('PUDDING')).to.deep.equal([recipeData[0]]);
     });
+
+    it('should be able to search favoriteRecipes by ingredient', () => {
+      expect(user.findFavorites('apple')).to.deep.equal([recipeData[1]]);
+    });
   });
 });
