@@ -26,16 +26,28 @@ class User {
     }
   }
 
-  filterByTag(tag) {
-    return this.favoriteRecipes.filter(recipe => {
-      return recipe.tags.includes(tag);
-    });
+  filterByTag(tags) {
+    const newFilterTags = typeof tags === "string" ? [tags] : tags;
+    let filteredRecipes = [];
+    newFilterTags.forEach(tag => {
+      this.favoriteRecipes.forEach(recipe => {
+        if (recipe.tags.includes(tag)) {
+          filteredRecipes.push(recipe)
+        }
+      })
+    })
+    return [...new Set(filteredRecipes)];
   }
 
-  findFavorites(name) {
-    const newSearchText = name.toLowerCase();
+  findFavorites(nameOrIngredient) {
+    const newSearchText = nameOrIngredient.toLowerCase();
     return this.favoriteRecipes.filter(recipe => {
-      return recipe.name.toLowerCase().includes(newSearchText)
+      const stringifiedInstructions = recipe.instructions.map(item => {
+        return item.instruction;
+      }).join(' ').toLowerCase();
+      
+      return recipe.name.toLowerCase().includes(newSearchText) || 
+        stringifiedInstructions.includes(newSearchText)
     });
   }
 }

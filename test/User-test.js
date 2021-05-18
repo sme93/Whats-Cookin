@@ -60,9 +60,16 @@ describe('User', () => {
       user.addToFavorites(recipeData[1]);
     });
 
-    it('should be able to filter through favoriteRecipes by tag', () => {
+    it('should be able to filter through favoriteRecipes by one tag', () => {
       expect(user.filterByTag('snack'))
         .to.deep.equal([recipeData[0]]);
+    });
+
+    it('should be able to filter favoriteRecipes by multiple tags', () => {
+      user.addToFavorites(recipeData[7]);
+
+      expect(user.filterByTag(['snack', 'antipasti']))
+        .to.deep.equal([recipeData[0], recipeData[7]]);
     });
   
     it('should be able to search favoriteRecipes by name', () => {
@@ -72,6 +79,10 @@ describe('User', () => {
     it(`should be able to search favoriteRecipes, 
               without regard to capitalization`, () => {
       expect(user.findFavorites('PUDDING')).to.deep.equal([recipeData[0]]);
+    });
+
+    it('should be able to search favoriteRecipes by ingredient', () => {
+      expect(user.findFavorites('apple slices')).to.deep.equal([recipeData[1]]);
     });
   });
 });
