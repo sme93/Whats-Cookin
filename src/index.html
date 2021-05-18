@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Whats Cookin</title>
-  </head>
-  <body>
-    <h1>Whats Cookin</h1>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>Rosemary & Sage</title>
+</head>
+<body>
+  <nav class='nav-bar' id='navBar'>
+    <button class='my-favorites' id='myFavoriteRecipes'>My Favorite Recipes</button>
+    <button class='recipes-to-cook' id='recipesToCook'>My Recipes To Cook</button>
+  </nav>
+  <header>
+    <h1 class='header' id='header'>Rosemary & Sage</h1>
+    <h2 class='sub-header' id='subheader'>A Recipe Collection</h2>
+  </header>
+  <main class='main-page' id='mainPage'>
+    <section class='all-recipes' id='allRecipes'>
+      <h3 class='all-recipe-header' id='allRecipeHeader'>All Recipes</h3>
+      <article class='all-recipe-cards' id='allRecipeCards'>
+        <div class='recipe-card' id='recipeCard'>
+          <img>
+          <div class='favorite-heart' id='favoriteHeart'>
+            <img heart icon>
+          </div>
+          <div class='add-to-cook' id='addToCook'>
+            <img checkmark icon>
+          </div>
+        </div>
+      </article>
+    </section>
+    <aside>
+    </aside>
+  </main>
+</body>
+
 </html>
