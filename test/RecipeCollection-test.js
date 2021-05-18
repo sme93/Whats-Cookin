@@ -19,25 +19,19 @@ describe('Recipe Collection', () => {
     expect(recipeCollection.recipes).to.be.an('array')
   });
 
+  it('Should store ingredient data', () => {
+    expect(recipeCollection.ingredients).to.be.an('array')
+  });
+
   it('Should filter recipes by one or more tags', () => {
-    expect(recipeCollection.filterRecipe('antipasti').length).to.equal(9)
+    expect(recipeCollection.filterByTag('antipasti').length).to.equal(9)
   });
 
   it('Should filter recipes based on name', () => {
-    expect(recipeCollection.filterRecipe('Ambrosia Cupcakes').length).to.equal(1);
+    expect(recipeCollection.filterByName('Ambrosia Cupcakes').length).to.equal(1);
   });
 
   it('Should filter recipes based on an ingredient', () => {
-    expect(recipeCollection.findRecipe('eggs').length).to.equal(13);
+    expect(recipeCollection.filterByIngredient('eggs').length).to.equal(13);
   });
-
 })
-
-
-
-// A RecipeRepository should hold onto all Recipe objects.
-//
-// It should have a parameter to take in recipe data.
-// It should have methods to determine:
-// A filtered list of recipes based on one or more tags.
-// A filtered list of recipes based on its name or ingredients.

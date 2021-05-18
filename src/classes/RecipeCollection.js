@@ -4,33 +4,38 @@ class RecipeCollection {
     this.ingredients = allIngredients;
   }
 
-  filterRecipe(searchInput) {
+  filterByTag(tag) {
     const recipeMatches = this.recipes.reduce((searchedRecipes, recipe) => {
-      if (recipe.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-        recipe.tags.includes(searchInput.toLowerCase()) ||
-        recipe.ingredients.includes(searchInput.toLowerCase())) {
-        searchedRecipes.push(recipe);
+      if (recipe.tags.includes(tag)) {
+        searchedRecipes.push(recipe)
       }
       return searchedRecipes;
     }, [])
     return recipeMatches;
   }
 
-  findRecipe(ingredientInput) {
+  filterByName(input) {
+    const recipesWithInput = this.recipes.filter(recipe => {
+      return recipe.name.toLowerCase().includes(input.toLowerCase())
+    })
+    return recipesWithInput
+  }
+
+  filterByIngredient(input) {
     const ingredientMatch = this.ingredients.find(ingredient => {
-      if (ingredient.name === ingredientInput.toLowerCase()) {
+      if (ingredient.name === input.toLowerCase()) {
         return ingredient
       }
     });
-    const recipesWithIngredient = [];
+    const recipesWithInput = [];
     this.recipes.forEach(recipe => {
       return recipe.ingredients.filter(ingredient => {
         if (ingredient.id === ingredientMatch.id) {
-          recipesWithIngredient.push(recipe.name)
+          recipesWithInput.push(recipe.name)
         }
       });
     })
-    return recipesWithIngredient
+    return recipesWithInput
   }
 }
 
