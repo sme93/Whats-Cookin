@@ -12,15 +12,15 @@
     <button class='my-favorites' id='myFavoriteRecipes'>My Favorite Recipes</button>
     <button class='recipes-to-cook' id='recipesToCook'>My Recipes To Cook</button>
   </nav>
-  <header>
+  <section class='main-header'>
     <h1 class='header' id='header'>Rosemary & Sage</h1>
     <h2 class='sub-header' id='subheader'>A Recipe Collection</h2>
-  </header>
+  </section>
   <main class='main-page' id='mainPage'>
     <section class='all-recipes' id='allRecipes'>
       <h3 class='all-recipe-header' id='allRecipeHeader'>All Recipes</h3>
       <article class='all-recipe-cards' id='allRecipeCards'>
-        <div class='recipe-card' id='recipeCard'>
+        <!-- <div class='recipe-card' id='recipeCard'>
           <img>
           <div class='favorite-heart' id='favoriteHeart'>
             <img heart icon>
@@ -28,10 +28,15 @@
           <div class='add-to-cook' id='addToCook'>
             <img checkmark icon>
           </div>
-        </div>
+        </div> -->
       </article>
     </section>
-    <aside>
+    <aside class='' id=''>
+      <input type='search' placeholder='Search for a Recipe' class='search-bar' id='searchBar'>
+      <p class='filter-by-tag'>Filter By Type</p>
+      <form class='recipe-tags' id='recipeTags'>
+      </form>
+      <button class='filter-recipes' id='filterRecipes'>FILTER</button>
     </aside>
   </main>
 </body>
