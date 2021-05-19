@@ -20,12 +20,12 @@ const fetchData = () => {
   return Promise.all([userData, ingredientData, recipeData])
     .then(data => {
       const allData = {};
-      allData.userData = data[0].usersData;
-      allData.ingredientData = data[1].ingredientsData;
-      allData.recipeData = data[2].recipeData;
+      allData.users = data[0].usersData;
+      allData.ingredients = data[1].ingredientsData;
+      allData.recipes = data[2].recipeData;
       return allData;
     })
     .catch(err => console.log('ERROR', err))
 }
 
-export default { fetchData }
+export { fetchData }
