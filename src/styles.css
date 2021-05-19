@@ -1,3 +1,95 @@
+/* COLOR PALETTE */
+/* light grey:
+grey: */
+
+* {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+html,
 body {
-  background-color: blueviolet;
+  margin: 0;
+  height: 100vh;
+}
+
+/* NAV BAR */
+.nav-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-bottom: 3px solid #f0f0f0;
+  background: white;
+  position: sticky;
+  top: 0;
+}
+
+.my-favorites,
+.recipes-to-cook,
+.filter-recipes, {
+  margin: 10px;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.recipes-to-cook:hover {
+  border-bottom: 2px solid black;
+}
+
+.my-favorites:hover {
+  border-bottom: 2px solid black;
+}
+
+/* HEADER */
+
+.main-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0px 20px 0px;
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  margin: 0px;
+}
+
+h2 {
+  font-size: 24px;
+  font-style: italic;
+  margin: 0px;
+
+}
+
+/* MAIN */
+
+.main-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.all-recipes {
+  border: 1px solid blue;
+  width: 80%;
+}
+
+/* ASIDE */
+
+.filter-section {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  padding: 25px;
+}
+
+.recipe-tags {
+  margin: 50px;
 }
