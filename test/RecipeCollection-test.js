@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
-import { recipeData } from '../src/data/recipes.js';
-import { ingredientsData } from '../src/data/ingredients.js';
+import { recipeData } from '../src/testData/recipes';
+import { ingredientsData } from '../src/testData/ingredients';
 import RecipeCollection from '../src/classes/RecipeCollection';
 
 let recipeCollection;
