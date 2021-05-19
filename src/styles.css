@@ -1,3 +1,45 @@
+/* COLOR PALETTE */
+/* light grey:
+grey: */
+
+* {
+  font-family: 'Playfair', sans-serif;
+  font-weight: 400;
+}
+
 body {
-  background-color: blueviolet;
+  margin: 0;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+  border-bottom: 3px solid #f0f0f0;
+}
+
+.my-favorites,
+.recipes-to-cook {
+  margin: 10px;
+}
+
+.main-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.all-recipes {
+  border: 1px solid blue
+}
+
+.filter-section {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-tags {
+  margin: 10px;
+  
 }
