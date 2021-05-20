@@ -1,5 +1,11 @@
 import './styles.css';
-import apiCalls from './apiCalls';
+import { fetchData } from './apiCalls';
+
+fetchData().then(allData => {
+  console.log(allData)
+})
+
+
 
 
 

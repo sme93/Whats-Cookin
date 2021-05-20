@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import User from '../src/classes/User';
-import { recipeData } from '../src/data/recipes';
+import { recipeData } from '../src/testData/recipes';
 
 let user;
 
