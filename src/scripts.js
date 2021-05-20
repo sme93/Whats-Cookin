@@ -16,9 +16,7 @@ function onPageLoad() {
       return new Recipe(recipe)
     });
     const randomUserIndex = Math.floor(Math.random() * allData.users.length);
-    console.log(allData.users)
     currentUser = new User(allData.users[randomUserIndex]);
-    console.log(currentUser);
     const ingredients = allData.ingredients;
     greetUser();
     renderRecipes(recipes);
@@ -59,7 +57,11 @@ function renderFilterTags(recipes) {
   }, []);
   const uniqueTags = [...new Set(recipeTags)];
   const tagMarkup = uniqueTags.map(tag => {
-    return `<button class='recipe-tags' id="${tag}">${tag}</button>`
+    return `
+      <div class='recipe-tags'>
+        <input type='radio' id=${tag} name=${tag} value=${tag}>
+        <label for=${tag}>${tag}</label>
+      </div>`
   }).join('');
 
   allFilters.innerHTML = tagMarkup;

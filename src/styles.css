@@ -126,7 +126,7 @@ img {
 }
 
 .recipe-tags {
-  margin: 50px;
+  display: flex;
 }
 
 /* Media-queries */
