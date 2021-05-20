@@ -4,6 +4,8 @@ import Recipe from '../src/classes/Recipe';
 import User from '../src/classes/User';
 
 const allRecipes = document.getElementById('allRecipes');
+const userName = document.getElementById('userGreeting');
+let currentUser;
 
 window.addEventListener('load', onPageLoad);
 
@@ -12,23 +14,23 @@ function onPageLoad() {
   fetchData().then(allData => {
     const recipes = allData.recipes.map(recipe => {
       return new Recipe(recipe)
-    })
-    //we can add logic here to pick a random user on startup
-    const user = new User(allData.users[0]);
+    });
+    const randomUserIndex = Math.floor(Math.random() * allData.users.length);
+    currentUser = new User(allData.users[randomUserIndex]);
     const ingredients = allData.ingredients;
-    console.log(ingredients)
+    greetUser();
     renderRecipes(recipes);
+    renderFilterTags(recipes);
   });
 }
 
-// We're going to use this function any time we want to render recipes
-// sometimes that will be a "users favorites" and other times it will be
-// "filtered list". For now it's just going to be all the recipes
-// when the page loads!
+function greetUser() {
+  userName.innerHTML = `Hello, ${currentUser.name.split(' ')[0]}`
+}
+
 function renderRecipes(recipes) {
-   //console.log("recipes ", recipes);
-   const recipeMarkup = recipes.map(item => {
-     return ` <article>
+  const recipeMarkup = recipes.map(item => {
+    return ` <article>
         <div class='recipe-card' id='recipeCard'>
           <img src=${item.image}>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
@@ -42,16 +44,28 @@ function renderRecipes(recipes) {
               <img src="https://img.icons8.com/ios/50/000000/plus--v1.png"/>
             </div>
          </article>`
-   }).join('');
+  }).join('');
 
-   allRecipes.innerHTML = recipeMarkup
-  }
+  allRecipes.innerHTML = recipeMarkup;
+}
 
-  //select recipe area
-  //map over recipes to make markup/HTML
-  //render on page with markup
+function renderFilterTags(recipes) {
+  const allFilters = document.getElementById('recipeTags');
 
+  const recipeTags = recipes.reduce((acc, recipe) => {
+    return [...acc, ...recipe.tags];
+  }, []);
+  const uniqueTags = [...new Set(recipeTags)];
+  const tagMarkup = uniqueTags.map(tag => {
+    return `
+      <div class='recipe-tags'>
+        <input type='radio' id=${tag} name=${tag} value=${tag}>
+        <label for=${tag}>${tag}</label>
+      </div>`
+  }).join('');
 
+  allFilters.innerHTML = tagMarkup;
+}
 
 
 

@@ -11,8 +11,13 @@
 </head>
 <body>
   <nav class='nav-bar' id='navBar'>
-    <button class='my-favorites' id='myFavoriteRecipes'>My Favorite Recipes</button>
-    <button class='recipes-to-cook' id='recipesToCook'>My Recipes To Cook</button>
+    <div> 
+        <h2 class='user-greeting' id='userGreeting'></h2>
+    </div>
+    <div>
+        <button class='my-favorites' id='myFavoriteRecipes'>My Favorite Recipes</button>
+        <button class='recipes-to-cook' id='recipesToCook'>My Recipes To Cook</button>
+    </div>
   </nav>
   <section class='main-header'>
     <h1 class='header' id='header'>Rosemary & Sage</h1>
@@ -38,7 +43,7 @@
     <aside class='filter-section' id='filterSection'>
       <input type='search' placeholder='Search for a Recipe' class='search-bar' id='searchBar'>
       <p class='filter-by-tag'>Filter By Type</p>
-      <form class='recipe-tags' id='recipeTags'>
+      <form id='recipeTags'>
       </form>
       <button class='filter-recipes' id='filterRecipes'>FILTER</button>
     </aside>

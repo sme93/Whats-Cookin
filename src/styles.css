@@ -3,7 +3,7 @@
 grey: */
 
 * {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
   font-weight: 400;
 }
 
@@ -16,7 +16,7 @@ body {
 /* NAV BAR */
 .nav-bar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 10px;
   border-bottom: 3px solid #f0f0f0;
   background: white;
@@ -27,7 +27,7 @@ body {
 
 .my-favorites,
 .recipes-to-cook,
-.filter-recipes, {
+.filter-recipes {
   margin: 10px;
   outline: none;
   background-color: transparent;
@@ -76,13 +76,13 @@ h2 {
 }
 
 .all-recipes {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: minmax(200px, 1fr) 1rem minmax(200px, 1fr) 1rem
-      minmax(200px, 1fr) 1rem minmax(200px, 1fr);
-    grid-template-columns: repeat(4, minmax(200px, 1fr));
-    gap: 1rem;
-  }
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(200px, 1fr) 1rem minmax(200px, 1fr) 1rem
+    minmax(200px, 1fr) 1rem minmax(200px, 1fr);
+  grid-template-columns: repeat(4, minmax(200px, 1fr));
+  gap: 1rem;
+}
 
 /* RECIPE CARD */
 
@@ -126,7 +126,7 @@ img {
 }
 
 .recipe-tags {
-  margin: 50px;
+  display: flex;
 }
 
 /* Media-queries */
