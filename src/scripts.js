@@ -16,7 +16,8 @@ function onPageLoad() {
       return new Recipe(recipe)
     });
     const randomUserIndex = Math.floor(Math.random() * allData.users.length);
-    currentUser = allData.users[randomUserIndex];
+    console.log(allData.users)
+    currentUser = new User(allData.users[randomUserIndex]);
     console.log(currentUser);
     const ingredients = allData.ingredients;
     greetUser();

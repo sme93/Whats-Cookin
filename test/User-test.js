@@ -7,7 +7,7 @@ let user;
 
 describe('User', () => {
   beforeEach(() => {
-    user = new User('Rosemary', 1);
+    user = new User({name: 'Rosemary', id: 1});
   });
 
   it('should be an instance of User', () => {
