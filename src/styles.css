@@ -22,6 +22,7 @@ body {
   background: white;
   position: sticky;
   top: 0;
+  width: 100%;
 }
 
 .my-favorites,
@@ -63,7 +64,6 @@ h2 {
   font-size: 24px;
   font-style: italic;
   margin: 0px;
-
 }
 
 /* MAIN */
@@ -76,8 +76,43 @@ h2 {
 }
 
 .all-recipes {
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
   width: 80%;
+  height: 100%;
+  border-top: 2px solid #f0f0f0;
+  border-right: 3px solid #f0f0f0;
+}
+
+/* RECIPE CARD */
+
+.recipe-card {
+  border: 2px solid grey;
+  display: flex;
+  flex-direction: column;
+  height: 260px;
+  width: 200px;
+  margin: 50px;
+}
+
+.recipe-card-bottom {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.recipe-img {
+  height: 200px;
+  position: relative;
+}
+
+img {
+  height: 40px;
+}
+
+.view-recipe-text {
+  background-color: #f0f0f0;
+  margin: 0px 0px 5px 0px;
+  height: 60px;
 }
 
 /* ASIDE */
