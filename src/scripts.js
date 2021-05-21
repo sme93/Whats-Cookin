@@ -32,16 +32,17 @@ function renderRecipes(recipes) {
   const recipeMarkup = recipes.map(item => {
     return ` <article>
         <div class='recipe-card' id='recipeCard'>
-          <img src=${item.image}>
+          <img src=${item.image} class='recipe-img'>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
             <div class='favorite-heart' id='favoriteHeart'>
               <img src="https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png"/>
             </div>
-            <div class='view-recipe-text' id='viewRecipeText'>
-              <p class='view-recipe' id='showRecipe'>${item.name}</p>
-            </div>
             <div class='add-to-cook' id='addToCook'>
               <img src="https://img.icons8.com/ios/50/000000/plus--v1.png"/>
+            </div>
+          </section>
+            <div class='view-recipe-text' id='viewRecipeText'>
+            <p class='view-recipe' id='showRecipe'>${item.name}</p>
             </div>
          </article>`
   }).join('');
