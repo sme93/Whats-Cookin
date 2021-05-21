@@ -3,12 +3,12 @@
 grey: */
 
 * {
-  font-family: "Playfair Display", serif;
-  font-weight: 400;
 }
 
 html,
 body {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
   margin: 0;
   height: 100%;
 }
@@ -43,7 +43,7 @@ body {
 .recipes-to-cook,
 .filter-recipes {
   font-size: 16px;
-   margin: 10px 20px;
+  margin: 10px 20px;
   outline: none;
   background-color: transparent;
   border: none;
@@ -91,7 +91,7 @@ h2 {
 }
 
 .all-recipes {
-  margin:45px;
+  margin: 45px;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: minmax(200px, 1fr) 1rem minmax(200px, 1fr) 1rem
@@ -144,8 +144,20 @@ img {
   padding: 25px;
 }
 
-.recipe-tags {
+.recipe-tag {
+  color: #333;
   display: flex;
+  align-items: center;
+  margin: 8px;
+}
+
+.recipe-tag-input {
+  margin-right: 8px;
+}
+
+.recipe-tag-quantity {
+  color: lightgray;
+  font-size: 14px;
 }
 
 /* Media-queries */

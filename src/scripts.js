@@ -54,14 +54,31 @@ function renderFilterTags(recipes) {
   const allFilters = document.getElementById('recipeTags');
 
   const recipeTags = recipes.reduce((acc, recipe) => {
-    return [...acc, ...recipe.tags];
-  }, []);
-  const uniqueTags = [...new Set(recipeTags)];
-  const tagMarkup = uniqueTags.map(tag => {
+    // {tagname: numberofTags}
+    recipe.tags.forEach(tag => {
+      if (acc[tag]) {
+        acc[tag] += 1
+      } else {
+        acc[tag] = 1
+      }
+    })
+    return acc;
+  }, {});
+  
+  const tagMarkup = Object.entries(recipeTags).map(tag => {
+    console.log(tag);
+    const [tagName, quantity] = tag
     return `
-      <div class='recipe-tags'>
-        <input type='radio' id=${tag} name=${tag} value=${tag}>
-        <label for=${tag}>${tag}</label>
+      <div class='recipe-tag'>
+        <input 
+          class='recipe-tag-input' 
+          type='radio' 
+          id=${tagName} 
+          name=${tagName} 
+          value=${tagName}>
+        <label for=${tagName}>${tagName} 
+          <span class='recipe-tag-quantity'>  (${quantity})</span>
+        </label>
       </div>`
   }).join('');
 
