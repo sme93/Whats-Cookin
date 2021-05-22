@@ -3,11 +3,17 @@ import { fetchData } from './apiCalls';
 import Recipe from '../src/classes/Recipe';
 import User from '../src/classes/User';
 
-const allRecipes = document.getElementById('allRecipes');
+const allRecipesSection = document.getElementById('allRecipes');
 const userName = document.getElementById('userGreeting');
-let currentUser;
+const favorite = document.getElementById('favoriteHeart')
+let currentUser, recipeCollection, ingredients, modal;
 
 window.addEventListener('load', onPageLoad);
+window.addEventListener('click', closeModal);
+allRecipesSection.addEventListener('click', () => {
+  displayRecipe(event);
+})
+favorite.addEventListener('click', saveToFaves)
 
 
 function onPageLoad() {
@@ -17,7 +23,7 @@ function onPageLoad() {
     });
     const randomUserIndex = Math.floor(Math.random() * allData.users.length);
     currentUser = new User(allData.users[randomUserIndex]);
-    const ingredients = allData.ingredients;
+    // recipeCollection = new recipeCollection(allData.recipes, allData.ingredients);
     greetUser();
     renderRecipes(recipes);
     renderFilterTags(recipes);
@@ -31,7 +37,7 @@ function greetUser() {
 function renderRecipes(recipes) {
   const recipeMarkup = recipes.map(item => {
     return ` <article>
-        <div class='recipe-card' id='recipeCard'>
+        <div class='recipe-card' id='${item.id}'>
           <img src=${item.image} class='recipe-img'>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
             <div class='favorite-heart' id='favoriteHeart'>
@@ -47,7 +53,7 @@ function renderRecipes(recipes) {
          </article>`
   }).join('');
 
-  allRecipes.innerHTML = recipeMarkup;
+  allRecipesSection.innerHTML = recipeMarkup;
 }
 
 function renderFilterTags(recipes) {
@@ -64,19 +70,19 @@ function renderFilterTags(recipes) {
     })
     return acc;
   }, {});
-  
+
   const tagMarkup = Object.entries(recipeTags).map(tag => {
     console.log(tag);
     const [tagName, quantity] = tag
     return `
       <div class='recipe-tag'>
-        <input 
-          class='recipe-tag-input' 
-          type='radio' 
-          id=${tagName} 
-          name=${tagName} 
+        <input
+          class='recipe-tag-input'
+          type='radio'
+          id=${tagName}
+          name=${tagName}
           value=${tagName}>
-        <label for=${tagName}>${tagName} 
+        <label for=${tagName}>${tagName}
           <span class='recipe-tag-quantity'>  (${quantity})</span>
         </label>
       </div>`
@@ -87,20 +93,53 @@ function renderFilterTags(recipes) {
 
 
 
+//I think this logic is correct but I cannot seem to get it to recognize the recipeData :(
+function displayRecipe(event) {
+  const recipeID = event.target.id;
+  const matchingRecipe = recipeData.filter(recipe => {
+    return recipe.id === parseInt(recipeId)
+  })
+  openModal(matchingRecipe)
+}
+
+function openModal(matchingRecipe) {
+   modal = `<div class='modal' id='${matchingRecipe.id}'>
+        <div class='modal-content' id='modalContent'>
+          <img src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
+          <h2 class='modal-header' id='modalHeader'>Recipe</h2>
+          <div>
+            <img id="modalImg" src=${matchingRecipe.image} alt="recipe image" class="modal-img">
+          </div>
+          <article class='modal-details' id='modalDetails'>
+            <h3 class='ingredient-header'>Ingredients</h3>
+            <p class='ingredients' id='recipeIngredients'>${matchingRecipe.returnIngredients()}</p>
+            <h3 class='cost-header'>Total Cost of Ingredients</h3>
+            <p class='total-cost' id='totalCost'>${matchingRecipe.calculateCost(ingredientsData)}</p>
+            <h3 class='recipe-instructions-header'>Instructions</h3>
+            <p class='instructions' id='instructions'>${matchingRecipe.returnInstructions()}</p>
+          </article>
+          <div class='favorite-heart' id='favoriteHeart'>
+            <img src="https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png"/>
+          </div>
+          <div class='add-to-cook' id='addToCook'>
+            <img src="https://img.icons8.com/ios/50/000000/plus--v1.png"/>
+          </div>
+        </div>
+      </div>`
+      modal.style.display = 'block';
+    }
+
+function closeModal(event) {
+  if (event.target === modal) {
+    modal.style.display = 'none';
+  }
+}
 
 
+function savetoFaves() {
+  favorite.classList.add('active')
 
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
