@@ -27,7 +27,7 @@ function onPageLoad() {
     recipeCollection = new RecipeCollection(allData.recipes, allData.ingredients);
     greetUser();
     renderRecipes(recipeCollection);
-    renderFilterTags(recipes);
+    renderFilterTags(recipeCollection);
   });
 }
 
@@ -36,10 +36,10 @@ function greetUser() {
 }
 
 function renderRecipes(recipeCollection) {
-  const recipeMarkup = recipeCollection.recipes.map(item => {
+  const recipeMarkup = recipeCollection.recipes.map(recipe => {
     return ` <article>
-        <div class='recipe-card' id='${item.id}'>
-          <img src=${item.image} class='recipe-img'>
+        <div class='recipe-card' id='${recipe.id}'>
+          <img src=${recipe.image} class='recipe-img'>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
             <div class='favorite-heart' id='favoriteHeart'>
               <img src="https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png"/>
@@ -49,7 +49,7 @@ function renderRecipes(recipeCollection) {
             </div>
           </section>
             <div class='view-recipe-text' id='viewRecipeText'>
-            <p class='view-recipe' id='showRecipe'>${item.name}</p>
+            <p class='view-recipe' id='showRecipe'>${recipe.name}</p>
             </div>
          </article>`
   }).join('');
@@ -57,10 +57,10 @@ function renderRecipes(recipeCollection) {
   allRecipesSection.innerHTML = recipeMarkup;
 }
 
-function renderFilterTags(recipes) {
+function renderFilterTags(recipeCollection) {
   const allFilters = document.getElementById('recipeTags');
 
-  const recipeTags = recipes.reduce((acc, recipe) => {
+  const recipeTags = recipeCollection.recipes.reduce((acc, recipe) => {
     // {tagname: numberofTags}
     recipe.tags.forEach(tag => {
       if (acc[tag]) {
