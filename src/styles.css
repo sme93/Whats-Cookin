@@ -13,6 +13,10 @@ body {
   height: 100%;
 }
 
+.hidden {
+  display: none;
+}
+
 /* NAV BAR */
 .nav-bar {
   z-index: 1;
@@ -135,7 +139,7 @@ img {
 }
 
 .favorite-heart:active {
-  background-color: pink;
+  color: pink;
 }
 
 /* RECIPE MODAL */
@@ -152,7 +156,6 @@ img {
   display: flex;
   align-items: center;
   display: none;
-  opacity: 0;
 }
 
 .modal-content {
@@ -161,8 +164,12 @@ img {
   height: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   align-items: center;
+}
+
+.modal-details {
+  display: flex;
+  flex-direction: column;
 }
 /* ASIDE */
 
