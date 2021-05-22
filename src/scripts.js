@@ -8,10 +8,12 @@ const allRecipesSection = document.getElementById('allRecipes');
 const userName = document.getElementById('userGreeting');
 const recipeModal = document.getElementById('modal')
 // const favorite = document.getElementById('favoriteHeart')
+const recipeTags = document.getElementById('recipeTags');
 let currentUser, recipeCollection, ingredients, recipe;
 
 window.addEventListener('load', onPageLoad);
 window.addEventListener('click', closeModal);
+recipeTags.addEventListener('click', filterByTag);
 allRecipesSection.addEventListener('click', () => {
   displayRecipe(event);
 })
@@ -30,7 +32,7 @@ function onPageLoad() {
     currentUser = new User(allData.users[randomUserIndex]);
     recipeCollection = new RecipeCollection(allData.recipes, allData.ingredients);
     greetUser();
-    renderRecipes(recipeCollection);
+    renderRecipes(recipeCollection.recipes);
     renderFilterTags(recipeCollection);
   });
 }
@@ -39,8 +41,8 @@ function greetUser() {
   userName.innerHTML = `Hello, ${currentUser.name.split(' ')[0]}`
 }
 
-function renderRecipes(recipeCollection) {
-  const recipeMarkup = recipeCollection.recipes.map(recipe => {
+function renderRecipes(recipes) {
+  const recipeMarkup = recipes.map(recipe => {
     return ` <article id=${recipe.id}>
         <div class='recipe-card'>
           <img src=${recipe.image} class='recipe-img'>
@@ -58,7 +60,7 @@ function renderRecipes(recipeCollection) {
          </article>`
   }).join('');
 
-  allRecipesSection.innerHTML += recipeMarkup;
+  allRecipesSection.innerHTML = recipeMarkup;
 }
 
 function renderFilterTags(recipeCollection) {
@@ -92,6 +94,17 @@ function renderFilterTags(recipeCollection) {
   }).join('');
 
   allFilters.innerHTML = tagMarkup;
+}
+
+function filterByTag(event) {
+  event.target.className += ' clicked';
+  const radioButtons = document.querySelectorAll('.recipe-tag-input.clicked');
+  const radioButtonIds = [...radioButtons].map(button => {
+    return button.id;
+  })
+  const recipes = recipeCollection.filterByTag(radioButtonIds);
+  renderRecipes(recipes);
+ console.log("recipes ", recipes);
 }
 
 function displayRecipe(event) {
