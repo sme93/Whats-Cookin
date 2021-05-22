@@ -158,19 +158,48 @@ img {
   display: none;
 }
 
-.modal-content {
+/* .modal-content {
   background-color: white;
   width: 50%;
   height: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
+} */
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 70%;
 }
 
 .modal-details {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
+
+.modal-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+}
+
+.x-icon {
+  height: 30px;
+  width: 30px;
+}
+
+.modal-img {
+  object-fit: cover;
+  height: 350px;
+}
+
 /* ASIDE */
 
 .filter-section {

@@ -15,7 +15,10 @@ window.addEventListener('click', closeModal);
 allRecipesSection.addEventListener('click', () => {
   displayRecipe(event);
 })
-// favorite.addEventListener('click', checkFavorites)
+
+favorite.addEventListener('click', () => {
+  checkFavorites(event);
+})
 
 
 function onPageLoad() {
@@ -121,11 +124,13 @@ function openModal(matchingRecipe) {
             <h3 class='recipe-instructions-header'>Instructions</h3>
             <p class='instructions' id='instructions'>instructions</p>
           </article>
-          <div class='favorite-heart' id='favoriteHeart'>
-            <img src="https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png"/>
-          </div>
-          <div class='add-to-cook' id='addToCook'>
-            <img src="https://img.icons8.com/ios/50/000000/plus--v1.png"/>
+          <div class='modal-icons'>
+            <div class='favorite-heart' id='favoriteHeart'>
+              <img src="https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png"/>
+            </div>
+            <div class='add-to-cook' id='addToCook'>
+              <img src="https://img.icons8.com/ios/50/000000/plus--v1.png"/>
+            </div>
           </div>
         </div>`
       recipeModal.style.display = 'flex';
@@ -137,9 +142,11 @@ function closeModal(event) {
   }
 }
 
-
-function checkFavorites() {
-
+function checkFavorites(event) {
+const favorites = recipeCollection.recipes.forEach(recipe => {
+  if(event.target.id === recipe.id && !currentUser.favoriteRecipes.includes(recipe.id)) {
+    currentUser.favoriteRecipes.push(recipe) 
+})
 
 }
 
