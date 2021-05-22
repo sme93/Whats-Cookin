@@ -2,25 +2,36 @@ import './styles.css';
 import { fetchData } from './apiCalls';
 import Recipe from '../src/classes/Recipe';
 import User from '../src/classes/User';
+import RecipeCollection from '../src/classes/RecipeCollection';
 
-const allRecipes = document.getElementById('allRecipes');
+const allRecipesSection = document.getElementById('allRecipes');
 const userName = document.getElementById('userGreeting');
-let currentUser;
+const recipeModal = document.getElementById('modal')
+// const favorite = document.getElementById('favoriteHeart')
+let currentUser, recipeCollection, ingredients, recipe;
 
 window.addEventListener('load', onPageLoad);
+window.addEventListener('click', closeModal);
+allRecipesSection.addEventListener('click', () => {
+  displayRecipe(event);
+})
+
+favorite.addEventListener('click', () => {
+  checkFavorites(event);
+})
 
 
 function onPageLoad() {
   fetchData().then(allData => {
-    const recipes = allData.recipes.map(recipe => {
+    recipe = allData.recipes.map(recipe => {
       return new Recipe(recipe)
     });
     const randomUserIndex = Math.floor(Math.random() * allData.users.length);
     currentUser = new User(allData.users[randomUserIndex]);
-    const ingredients = allData.ingredients;
+    recipeCollection = new RecipeCollection(allData.recipes, allData.ingredients);
     greetUser();
-    renderRecipes(recipes);
-    renderFilterTags(recipes);
+    renderRecipes(recipeCollection);
+    renderFilterTags(recipeCollection);
   });
 }
 
@@ -28,11 +39,11 @@ function greetUser() {
   userName.innerHTML = `Hello, ${currentUser.name.split(' ')[0]}`
 }
 
-function renderRecipes(recipes) {
-  const recipeMarkup = recipes.map(item => {
+function renderRecipes(recipeCollection) {
+  const recipeMarkup = recipeCollection.recipes.map(recipe => {
     return ` <article>
-        <div class='recipe-card' id='recipeCard'>
-          <img src=${item.image} class='recipe-img'>
+        <div class='recipe-card' id='${recipe.id}'>
+          <img src=${recipe.image} class='recipe-img'>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
             <div class='favorite-heart' id='favoriteHeart'>
               <img src="https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png"/>
@@ -42,18 +53,18 @@ function renderRecipes(recipes) {
             </div>
           </section>
             <div class='view-recipe-text' id='viewRecipeText'>
-            <p class='view-recipe' id='showRecipe'>${item.name}</p>
+            <p class='view-recipe' id='showRecipe'>${recipe.name}</p>
             </div>
          </article>`
   }).join('');
 
-  allRecipes.innerHTML = recipeMarkup;
+  allRecipesSection.innerHTML += recipeMarkup;
 }
 
-function renderFilterTags(recipes) {
+function renderFilterTags(recipeCollection) {
   const allFilters = document.getElementById('recipeTags');
 
-  const recipeTags = recipes.reduce((acc, recipe) => {
+  const recipeTags = recipeCollection.recipes.reduce((acc, recipe) => {
     // {tagname: numberofTags}
     recipe.tags.forEach(tag => {
       if (acc[tag]) {
@@ -64,19 +75,19 @@ function renderFilterTags(recipes) {
     })
     return acc;
   }, {});
-  
+
   const tagMarkup = Object.entries(recipeTags).map(tag => {
     console.log(tag);
     const [tagName, quantity] = tag
     return `
       <div class='recipe-tag'>
-        <input 
-          class='recipe-tag-input' 
-          type='radio' 
-          id=${tagName} 
-          name=${tagName} 
+        <input
+          class='recipe-tag-input'
+          type='radio'
+          id=${tagName}
+          name=${tagName}
           value=${tagName}>
-        <label for=${tagName}>${tagName} 
+        <label for=${tagName}>${tagName}
           <span class='recipe-tag-quantity'>  (${quantity})</span>
         </label>
       </div>`
@@ -85,33 +96,65 @@ function renderFilterTags(recipes) {
   allFilters.innerHTML = tagMarkup;
 }
 
+//I think this logic is correct but I cannot seem to get it to recognize the recipeData :(
+function displayRecipe(event) {
+  const recipeId = event.target.id;
+  const matchingRecipe = recipeCollection.recipes.filter(item => {
+    if(item.id === parseInt(recipeId)){
+      return new Recipe(recipe)
+    }
+  })
+  openModal(matchingRecipe)
+}
+
+function openModal(matchingRecipe) {
+  recipeModal.innerHTML = '';
+  recipeModal.innerHTML += `
+        <div class='modal-content' id='modal${matchingRecipe.id}'>
+          <img src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
+          <h2 class='modal-header' id='modalHeader'>${matchingRecipe.name}</h2>
+          <div>
+            <img id="modalImg" src=${matchingRecipe.image} alt="recipe image" class="modal-img">
+          </div>
+          <article class='modal-details' id='modalDetails'>
+            <h3 class='ingredient-header'>Ingredients</h3>
+            <p class='ingredients' id='recipeIngredients'>ingredients</p>
+            <h3 class='cost-header'>Total Cost of Ingredients</h3>
+            <p class='total-cost' id='totalCost'>cost</p>
+            <h3 class='recipe-instructions-header'>Instructions</h3>
+            <p class='instructions' id='instructions'>instructions</p>
+          </article>
+          <div class='modal-icons'>
+            <div class='favorite-heart' id='favoriteHeart'>
+              <img src="https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png"/>
+            </div>
+            <div class='add-to-cook' id='addToCook'>
+              <img src="https://img.icons8.com/ios/50/000000/plus--v1.png"/>
+            </div>
+          </div>
+        </div>`
+      recipeModal.style.display = 'flex';
+    }
+
+function closeModal(event) {
+  if (event.target === modal) {
+    recipeModal.style.display = 'none';
+  }
+}
+
+function checkFavorites(event) {
+const favorites = recipeCollection.recipes.forEach(recipe => {
+  if(event.target.id === recipe.id && !currentUser.favoriteRecipes.includes(recipe.id)) {
+    currentUser.favoriteRecipes.push(recipe) 
+})
+
+}
 
 
+function hide(element) {
+  element.classList.add('hidden');
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-// User Stories for RecipeCollection/Recipe
-// As a user, I should be able to view a list of all recipes.
-// As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
-// As a user, I should be able to filter recipes by multiple tags.
-// As a user, I should be able to search recipes by their name or ingredients.
+function show(element) {
+  element.classList.remove('hidden');
+}
