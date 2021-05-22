@@ -8,10 +8,12 @@ const allRecipesSection = document.getElementById('allRecipes');
 const userName = document.getElementById('userGreeting');
 const recipeModal = document.getElementById('modal')
 // const favorite = document.getElementById('favoriteHeart')
+const recipeTags = document.getElementById('recipeTags');
 let currentUser, recipeCollection, ingredients, recipe;
 
 window.addEventListener('load', onPageLoad);
 window.addEventListener('click', closeModal);
+recipeTags.addEventListener('click', filterByTag);
 allRecipesSection.addEventListener('click', () => {
   displayRecipe(event);
 })
@@ -30,7 +32,7 @@ function onPageLoad() {
     currentUser = new User(allData.users[randomUserIndex]);
     recipeCollection = new RecipeCollection(allData.recipes, allData.ingredients);
     greetUser();
-    renderRecipes(recipeCollection);
+    renderRecipes(recipeCollection.recipes);
     renderFilterTags(recipeCollection);
   });
 }
@@ -39,10 +41,10 @@ function greetUser() {
   userName.innerHTML = `Hello, ${currentUser.name.split(' ')[0]}`
 }
 
-function renderRecipes(recipeCollection) {
-  const recipeMarkup = recipeCollection.recipes.map(recipe => {
-    return ` <article>
-        <div class='recipe-card' id='${recipe.id}'>
+function renderRecipes(recipes) {
+  const recipeMarkup = recipes.map(recipe => {
+    return ` <article id=${recipe.id}>
+        <div class='recipe-card'>
           <img src=${recipe.image} class='recipe-img'>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
             <div class='favorite-heart' id='favoriteHeart'>
@@ -58,14 +60,13 @@ function renderRecipes(recipeCollection) {
          </article>`
   }).join('');
 
-  allRecipesSection.innerHTML += recipeMarkup;
+  allRecipesSection.innerHTML = recipeMarkup;
 }
 
 function renderFilterTags(recipeCollection) {
   const allFilters = document.getElementById('recipeTags');
 
   const recipeTags = recipeCollection.recipes.reduce((acc, recipe) => {
-    // {tagname: numberofTags}
     recipe.tags.forEach(tag => {
       if (acc[tag]) {
         acc[tag] += 1
@@ -77,7 +78,6 @@ function renderFilterTags(recipeCollection) {
   }, {});
 
   const tagMarkup = Object.entries(recipeTags).map(tag => {
-    console.log(tag);
     const [tagName, quantity] = tag
     return `
       <div class='recipe-tag'>
@@ -96,22 +96,37 @@ function renderFilterTags(recipeCollection) {
   allFilters.innerHTML = tagMarkup;
 }
 
-//I think this logic is correct but I cannot seem to get it to recognize the recipeData :(
+function filterByTag(event) {
+  event.target.className += ' clicked';
+  const radioButtons = document.querySelectorAll('.recipe-tag-input.clicked');
+  const radioButtonIds = [...radioButtons].map(button => {
+    return button.id;
+  })
+  const recipes = recipeCollection.filterByTag(radioButtonIds);
+  renderRecipes(recipes);
+ console.log("recipes ", recipes);
+}
+
 function displayRecipe(event) {
-  const recipeId = event.target.id;
-  const matchingRecipe = recipeCollection.recipes.filter(item => {
-    if(item.id === parseInt(recipeId)){
-      return new Recipe(recipe)
+  //instead of selecting the event.target.id, we are selecting the closest HTML 
+  //article element to our event.target. This will give us the recipe.id 
+  //every time. 
+  const recipeId = parseInt(event.target.closest("article").id);
+  //changed your filter to find since we wanted one recipe returned, not 
+  //an array with a recipe. Renamed to recipeInstance since it was
+  //returning a recipe class instance
+  const matchingRecipe = recipeCollection.recipes.find(recipeInstance => {
+    if (recipeInstance.id === recipeId) {
+      return recipeInstance;
     }
   })
   openModal(matchingRecipe)
 }
 
 function openModal(matchingRecipe) {
-  recipeModal.innerHTML = '';
-  recipeModal.innerHTML += `
+  recipeModal.innerHTML = `
         <div class='modal-content' id='modal${matchingRecipe.id}'>
-          <img src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
+          <img id='closeModal' src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
           <h2 class='modal-header' id='modalHeader'>${matchingRecipe.name}</h2>
           <div>
             <img id="modalImg" src=${matchingRecipe.image} alt="recipe image" class="modal-img">
@@ -133,20 +148,24 @@ function openModal(matchingRecipe) {
             </div>
           </div>
         </div>`
-      recipeModal.style.display = 'flex';
-    }
+  recipeModal.style.display = 'flex';
+}
 
 function closeModal(event) {
-  if (event.target === modal) {
+  //used what you already set up to make the modal close work so I 
+  //can keep working 
+  if (event.target.id === 'closeModal') {
+    recipeModal.innerHTML = '';
     recipeModal.style.display = 'none';
   }
 }
 
 function checkFavorites(event) {
-const favorites = recipeCollection.recipes.forEach(recipe => {
-  if(event.target.id === recipe.id && !currentUser.favoriteRecipes.includes(recipe.id)) {
-    currentUser.favoriteRecipes.push(recipe) 
-})
+  const favorites = recipeCollection.recipes.forEach(recipe => {
+    if (event.target.id === recipe.id && !currentUser.favoriteRecipes.includes(recipe.id)) {
+      currentUser.favoriteRecipes.push(recipe) 
+    }
+  })
 
 }
 

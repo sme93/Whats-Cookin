@@ -4,14 +4,16 @@ class RecipeCollection {
     this.ingredients = allIngredients;
   }
 
-  filterByTag(tag) {
+  filterByTag(tags) {
     const recipeMatches = this.recipes.reduce((searchedRecipes, recipe) => {
-      if (recipe.tags.includes(tag)) {
-        searchedRecipes.push(recipe)
-      }
+      tags.forEach(tag => {
+        if (recipe.tags.includes(tag)) {
+          searchedRecipes.push(recipe)
+        }
+      })
       return searchedRecipes;
     }, [])
-    return recipeMatches;
+    return [...new Set(recipeMatches)];
   }
 
   filterByName(input) {
