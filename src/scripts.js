@@ -2,30 +2,31 @@ import './styles.css';
 import { fetchData } from './apiCalls';
 import Recipe from '../src/classes/Recipe';
 import User from '../src/classes/User';
+import RecipeCollection from '../src/classes/RecipeCollection';
 
 const allRecipesSection = document.getElementById('allRecipes');
 const userName = document.getElementById('userGreeting');
 const favorite = document.getElementById('favoriteHeart')
-let currentUser, recipeCollection, ingredients, modal;
+let currentUser, recipeCollection, ingredients, modal, recipe;
 
 window.addEventListener('load', onPageLoad);
 window.addEventListener('click', closeModal);
 allRecipesSection.addEventListener('click', () => {
   displayRecipe(event);
 })
-favorite.addEventListener('click', saveToFaves)
+favorite.addEventListener('click', checkFavorites)
 
 
 function onPageLoad() {
   fetchData().then(allData => {
-    const recipes = allData.recipes.map(recipe => {
+    recipe = allData.recipes.map(recipe => {
       return new Recipe(recipe)
     });
     const randomUserIndex = Math.floor(Math.random() * allData.users.length);
     currentUser = new User(allData.users[randomUserIndex]);
-    // recipeCollection = new recipeCollection(allData.recipes, allData.ingredients);
+    recipeCollection = new RecipeCollection(allData.recipes, allData.ingredients);
     greetUser();
-    renderRecipes(recipes);
+    renderRecipes(recipeCollection);
     renderFilterTags(recipes);
   });
 }
@@ -34,8 +35,8 @@ function greetUser() {
   userName.innerHTML = `Hello, ${currentUser.name.split(' ')[0]}`
 }
 
-function renderRecipes(recipes) {
-  const recipeMarkup = recipes.map(item => {
+function renderRecipes(recipeCollection) {
+  const recipeMarkup = recipeCollection.recipes.map(item => {
     return ` <article>
         <div class='recipe-card' id='${item.id}'>
           <img src=${item.image} class='recipe-img'>
@@ -136,7 +137,7 @@ function closeModal(event) {
 }
 
 
-function savetoFaves() {
+function checkFavorites() {
   favorite.classList.add('active')
 
 }
