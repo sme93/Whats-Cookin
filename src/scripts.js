@@ -6,15 +6,16 @@ import RecipeCollection from '../src/classes/RecipeCollection';
 
 const allRecipesSection = document.getElementById('allRecipes');
 const userName = document.getElementById('userGreeting');
-const favorite = document.getElementById('favoriteHeart')
-let currentUser, recipeCollection, ingredients, modal, recipe;
+const recipeModal = document.getElementById('modal')
+// const favorite = document.getElementById('favoriteHeart')
+let currentUser, recipeCollection, ingredients, recipe;
 
 window.addEventListener('load', onPageLoad);
 window.addEventListener('click', closeModal);
 allRecipesSection.addEventListener('click', () => {
   displayRecipe(event);
 })
-favorite.addEventListener('click', checkFavorites)
+// favorite.addEventListener('click', checkFavorites)
 
 
 function onPageLoad() {
@@ -54,7 +55,7 @@ function renderRecipes(recipeCollection) {
          </article>`
   }).join('');
 
-  allRecipesSection.innerHTML = recipeMarkup;
+  allRecipesSection.innerHTML += recipeMarkup;
 }
 
 function renderFilterTags(recipeCollection) {
@@ -92,32 +93,33 @@ function renderFilterTags(recipeCollection) {
   allFilters.innerHTML = tagMarkup;
 }
 
-
-
 //I think this logic is correct but I cannot seem to get it to recognize the recipeData :(
 function displayRecipe(event) {
-  const recipeID = event.target.id;
-  const matchingRecipe = recipeData.filter(recipe => {
-    return recipe.id === parseInt(recipeId)
+  const recipeId = event.target.id;
+  const matchingRecipe = recipeCollection.recipes.filter(item => {
+    if(item.id === parseInt(recipeId)){
+      return new Recipe(recipe)
+    }
   })
   openModal(matchingRecipe)
 }
 
 function openModal(matchingRecipe) {
-   modal = `<div class='modal' id='${matchingRecipe.id}'>
-        <div class='modal-content' id='modalContent'>
+  recipeModal.innerHTML = '';
+  recipeModal.innerHTML += `
+        <div class='modal-content' id='modal${matchingRecipe.id}'>
           <img src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
-          <h2 class='modal-header' id='modalHeader'>Recipe</h2>
+          <h2 class='modal-header' id='modalHeader'>${matchingRecipe.name}</h2>
           <div>
             <img id="modalImg" src=${matchingRecipe.image} alt="recipe image" class="modal-img">
           </div>
           <article class='modal-details' id='modalDetails'>
             <h3 class='ingredient-header'>Ingredients</h3>
-            <p class='ingredients' id='recipeIngredients'>${matchingRecipe.returnIngredients()}</p>
+            <p class='ingredients' id='recipeIngredients'>ingredients</p>
             <h3 class='cost-header'>Total Cost of Ingredients</h3>
-            <p class='total-cost' id='totalCost'>${matchingRecipe.calculateCost(ingredientsData)}</p>
+            <p class='total-cost' id='totalCost'>cost</p>
             <h3 class='recipe-instructions-header'>Instructions</h3>
-            <p class='instructions' id='instructions'>${matchingRecipe.returnInstructions()}</p>
+            <p class='instructions' id='instructions'>instructions</p>
           </article>
           <div class='favorite-heart' id='favoriteHeart'>
             <img src="https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png"/>
@@ -125,33 +127,27 @@ function openModal(matchingRecipe) {
           <div class='add-to-cook' id='addToCook'>
             <img src="https://img.icons8.com/ios/50/000000/plus--v1.png"/>
           </div>
-        </div>
-      </div>`
-      modal.style.display = 'block';
+        </div>`
+      recipeModal.style.display = 'flex';
     }
 
 function closeModal(event) {
   if (event.target === modal) {
-    modal.style.display = 'none';
+    recipeModal.style.display = 'none';
   }
 }
 
 
 function checkFavorites() {
-  favorite.classList.add('active')
+
 
 }
 
 
+function hide(element) {
+  element.classList.add('hidden');
+}
 
-
-
-
-
-
-//
-// User Stories for RecipeCollection/Recipe
-// As a user, I should be able to view a list of all recipes.
-// As a user, I should be able to click on a recipe to view more information including directions, ingredients needed, and total cost.
-// As a user, I should be able to filter recipes by multiple tags.
-// As a user, I should be able to search recipes by their name or ingredients.
+function show(element) {
+  element.classList.remove('hidden');
+}
