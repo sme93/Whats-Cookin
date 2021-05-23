@@ -69,13 +69,12 @@ body {
   letter-spacing: 2px;
 }
 
-.recipes-to-cook:hover {
-  border-bottom: 2px solid #3CB371;
-}
-
+.recipes-to-cook:hover,
 .my-favorites:hover {
   border-bottom: 2px solid #3CB371;
+  cursor: pointer;
 }
+
 
 /* HEADER */
 
@@ -139,9 +138,17 @@ h2 {
   position: relative;
 }
 
-img {
+.add-to-cook-icon,
+.favorite-icon {
   height: 40px;
 }
+
+.favorite-icon:hover,
+.add-to-cook-icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 
 .view-recipe-text {
   margin: 0px 0px 5px 0px;
@@ -257,6 +264,10 @@ img {
 
 .recipe-tag-input {
   margin-right: 8px;
+}
+
+.recipe-tag-input:hover {
+  cursor: pointer;
 }
 
 .recipe-tag-quantity {
