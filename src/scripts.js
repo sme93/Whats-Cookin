@@ -14,7 +14,7 @@ let currentUser, recipeCollection, ingredients, recipes;
 window.addEventListener('load', onPageLoad);
 recipeTags.addEventListener('click', filterByTag);
 allRecipesSection.addEventListener('click', () => {
-  checkClickedRecipe(event);
+  determineRecipeClick(event);
 });
 recipeModal.addEventListener('click', () => {
   determineModalClick(event);
@@ -49,7 +49,7 @@ function renderRecipes(recipes) {
               <img src='https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png' class='favorite-icon' id='favoriteIcon'/>
             </div>
             <div class='add-to-cook' id='addToCook'>
-              <img src="https://img.icons8.com/android/24/000000/plus.png" class='add-to-cook-icon' id='addToCookIcon'>
+              <img src="https://img.icons8.com/ios/50/000000/plus--v1.png" class='add-to-cook-icon' id='addToCookIcon'>
             </div>
           </section>
             <div class='view-recipe-text' id='viewRecipeText'>
@@ -105,13 +105,13 @@ function filterByTag(event) {
  console.log("recipes ", recipes);
 }
 
-function checkClickedRecipe(event) {
+function determineRecipeClick(event) {
   if (event.target.className === 'favorite-icon') {
     addToFavoritesList(event);
   } else if (event.target.className.includes('active')) {
     removeFromFavorites(event);
   } else if (event.target.id === 'addToCookIcon') {
-    addRemoveToCook(event);
+    addToCook(event);
   } else {
     const recipeId = parseInt(event.target.closest("article").id);
     const matchingRecipe = recipeCollection.recipes.find(recipe => {
@@ -130,7 +130,7 @@ function displayRecipe(matchingRecipe) {
   }).join('...');
   console.log(formattedIngredients)
   recipeModal.innerHTML = `
-        <div class='modal-content' id='modal${matchingRecipe.id}'>
+        <article class='modal-content' id='${matchingRecipe.id}'>
           <img id='closeModal' src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
           <div class='modal-header'>
             <img id="modalImg" src='${matchingRecipe.image}' alt="recipe image" class="modal-img">
@@ -156,7 +156,7 @@ function displayRecipe(matchingRecipe) {
               <img src='https://img.icons8.com/ios/50/000000/plus--v1.png' class='add-to-cook-icon' id='addToCookIcon'/>
             </div>
           </div>
-        </div>`
+        <article>`
   openModal();
 }
 
@@ -168,6 +168,12 @@ function determineModalClick(event) {
   if (event.target.id === 'closeModal') {
     recipeModal.innerHTML = '';
     recipeModal.style.display = 'none';
+  } else if (event.target.className === 'favorite-icon') {
+    addToFavoritesList(event);
+  } else if (event.target.className.includes('active')) {
+    removeFromFavorites(event);
+  } else if (event.target.id === 'addToCookIcon') {
+    addToCook(event);
   }
 }
 
@@ -179,6 +185,7 @@ function addToFavoritesList(event) {
     return recipe.id === clickedRecipe;
   });
   currentUser.addToFavorites(matchedRecipe);
+  console.log(currentUser.favoriteRecipes)
   }
 
 function removeFromFavorites(event) {
@@ -190,7 +197,7 @@ function removeFromFavorites(event) {
   currentUser.removeFromFavorites(matchedRecipe);
   }
 
-function addRemoveToCook(event) {
+function addToCook(event) {
   const clickedRecipe = parseInt(event.target.closest('article').id);
   const matchedRecipe = recipeCollection.recipes.find((recipe) => {
     return recipe.id === clickedRecipe;
