@@ -9,10 +9,12 @@ const userName = document.getElementById('userGreeting');
 const recipeModal = document.getElementById('modal')
 const recipeTags = document.getElementById('recipeTags');
 const favoriteRecipe = document.querySelector('.favorite-icon');
+const searchBar = document.getElementById('searchBar');
 let currentUser, recipeCollection, ingredients, recipes;
 
 window.addEventListener('load', onPageLoad);
 recipeTags.addEventListener('click', filterByTag);
+searchBar.addEventListener('keyup', searchNameOrIngredient);
 allRecipesSection.addEventListener('click', () => {
   checkClickedRecipe(event);
 });
@@ -102,7 +104,7 @@ function filterByTag(event) {
   })
   const recipes = recipeCollection.filterByTag(radioButtonIds);
   renderRecipes(recipes);
- console.log("recipes ", recipes);
+  console.log("recipes ", recipes);
 }
 
 function checkClickedRecipe(event) {
@@ -176,7 +178,7 @@ function addToFavoritesList(event) {
   });
   currentUser.addToFavorites(matchedRecipe);
   console.log(currentUser.favoriteRecipes)
-  }
+}
 
 function removeFromFavorites(event) {
   const clickedRecipe = parseInt(event.target.closest('article').id);
@@ -185,7 +187,7 @@ function removeFromFavorites(event) {
     return recipe.id === clickedRecipe;
   });
   currentUser.removeFromFavorites(matchedRecipe);
-  }
+}
 
 function activate(element) {
   element.classList.add('active');
@@ -193,4 +195,13 @@ function activate(element) {
 
 function deactivate(element) {
   element.classList.remove('active');
+}
+
+function searchNameOrIngredient(event) {
+  const searchText = event.target.value;
+  let nameResult = recipeCollection.filterByName(searchText);
+  console.log(nameResult)
+  let ingredientResult = recipeCollection.filterByIngredient(searchText);
+  let finalResult = [...nameResult, ...ingredientResult];
+  return [...new Set(finalResult)];
 }
