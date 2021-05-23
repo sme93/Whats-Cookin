@@ -139,9 +139,10 @@ img {
 }
 
 
-.favorite-icon-active {
-  color: pink;
+.active {
+  background-color: red;
 }
+
 
 /* RECIPE MODAL */
 
