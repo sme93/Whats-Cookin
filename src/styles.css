@@ -5,12 +5,16 @@ grey: */
 * {
 }
 
-html,
+html {
+  height: 100vh;
+  width: 100%;
+}
 body {
   font-family: "Playfair Display", serif;
   font-weight: 400;
   margin: 0;
-  height: 100%;
+  height: 100vh;
+  width: 100%;
 }
 
 .hidden {
@@ -36,7 +40,7 @@ body {
 }
 
 .welcome-icon {
-  height: 55px;
+  height: 77px;
   margin-left: 70px;
 }
 
@@ -56,11 +60,11 @@ body {
 }
 
 .recipes-to-cook:hover {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #3CB371;
 }
 
 .my-favorites:hover {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #3CB371;
 }
 
 /* HEADER */
@@ -130,6 +134,8 @@ img {
   height: 40px;
 }
 
+
+
 .view-recipe-text {
   margin: 0px 0px 5px 0px;
   height: 60px;
@@ -176,7 +182,8 @@ img {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 70%;
+  width: 80%;
+  height: 100%;
 }
 
 .modal-details {
@@ -199,16 +206,17 @@ img {
 
 .modal-img {
   object-fit: cover;
-  height: 350px;
+  height: 200px;
 }
 
 /* ASIDE */
 
 .filter-section {
-  border: 1px solid red;
+  border-left: 3px solid #3CB371;
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 275px;
+  height: 680px;
   padding: 25px;
 }
 
