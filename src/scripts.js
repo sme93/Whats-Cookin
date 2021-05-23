@@ -9,23 +9,26 @@ const userName = document.getElementById('userGreeting');
 const recipeModal = document.getElementById('modal')
 const recipeTags = document.getElementById('recipeTags');
 const favoriteRecipe = document.querySelector('.favorite-icon');
-let currentUser, recipeCollection, ingredients, recipe;
+let currentUser, recipeCollection, ingredients, recipes;
 
 window.addEventListener('load', onPageLoad);
 recipeTags.addEventListener('click', filterByTag);
 allRecipesSection.addEventListener('click', () => {
   checkClickedRecipe(event);
-})
+});
+recipeModal.addEventListener('click', () => {
+  determineModalClick(event);
+});
 
 function onPageLoad() {
   fetchData().then(allData => {
-    recipe = allData.recipes.map(recipe => {
+    recipes = allData.recipes.map(recipe => {
       return new Recipe(recipe)
     });
     const randomUserIndex = Math.floor(Math.random() * allData.users.length);
     currentUser = new User(allData.users[randomUserIndex]);
     ingredients = allData.ingredients;
-    recipeCollection = new RecipeCollection(recipe, ingredients);
+    recipeCollection = new RecipeCollection(recipes, ingredients);
     greetUser();
     renderRecipes(recipeCollection.recipes);
     renderFilterTags(recipeCollection);
@@ -107,7 +110,6 @@ function checkClickedRecipe(event) {
   //article element to our event.target. This will give us the recipe.id
   //every time.
   if (event.target.className === 'favorite-icon') {
-    debugger;
     addToFavoritesList(event);
   } else if (event.target.className.includes('active')) {
     removeFromFavorites(event);
@@ -159,9 +161,7 @@ function openModal() {
   recipeModal.style.display = 'flex';
 }
 
-function closeModal(event) {
-  //used what you already set up to make the modal close work so I
-  //can keep working
+function determineModalClick(event) {
   if (event.target.id === 'closeModal') {
     recipeModal.innerHTML = '';
     recipeModal.style.display = 'none';
@@ -170,16 +170,17 @@ function closeModal(event) {
 
 function addToFavoritesList(event) {
   const clickedRecipe = parseInt(event.target.closest('article').id);
-  activate(favoriteRecipe);
+  activate(event.target);
   const matchedRecipe = recipeCollection.recipes.find((recipe) => {
     return recipe.id === clickedRecipe;
   });
   currentUser.addToFavorites(matchedRecipe);
+  console.log(currentUser.favoriteRecipes)
   }
 
 function removeFromFavorites(event) {
   const clickedRecipe = parseInt(event.target.closest('article').id);
-  deactivate(favoriteRecipe);
+  deactivate(event.target);
   const matchedRecipe = recipeCollection.recipes.find((recipe) => {
     return recipe.id === clickedRecipe;
   });
