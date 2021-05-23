@@ -36,8 +36,8 @@ body {
 }
 
 .welcome-icon {
-  height: 40px;
-  margin-left: 120px;
+  height: 55px;
+  margin-left: 70px;
 }
 
 .nav-buttons {
@@ -138,9 +138,11 @@ img {
   border-bottom: 2px solid black;
 }
 
-.favorite-heart:active {
-  color: pink;
+
+.active {
+  background-color: red;
 }
+
 
 /* RECIPE MODAL */
 
