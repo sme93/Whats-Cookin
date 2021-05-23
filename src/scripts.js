@@ -132,20 +132,22 @@ function displayRecipe(matchingRecipe) {
   recipeModal.innerHTML = `
         <div class='modal-content' id='modal${matchingRecipe.id}'>
           <img id='closeModal' src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
-          <h2 class='modal-header' id='modalHeader'>${matchingRecipe.name}</h2>
-          <div>
+          <div class='modal-header'>
             <img id="modalImg" src='${matchingRecipe.image}' alt="recipe image" class="modal-img">
+            <h2 class='modal-header' id='modalHeader'>${matchingRecipe.name}</h2>
           </div>
           <article class='modal-details' id='modalDetails'>
            <div class='modal-ingredients'>
             <h3 class='ingredient-header'>Ingredients</h3>
             <p class='ingredients' id='recipeIngredients'>${formattedIngredients}</p>
+           </div>
+           <div class='modal-cost'>
             <h3 class='cost-header'>Total Cost of Ingredients</h3>
             <p class='total-cost' id='totalCost'>${matchingRecipe.calculateCost(ingredients)}</p>
-           </div>
+           <div class='modal-cost'>
+          </article>
             <h3 class='recipe-instructions-header'>Instructions</h3>
             <p class='instructions' id='instructions'>${matchingRecipe.returnInstructions()}</p>
-          </article>
           <div class='modal-icons'>
             <div class='favorite-heart' id='favoriteHeart'>
               <img src='https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png' class='favorite-icon' id='favoriteIcon'/>
