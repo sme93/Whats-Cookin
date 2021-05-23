@@ -126,7 +126,7 @@ function checkClickedRecipe(event) {
 function displayRecipe(matchingRecipe) {
   const matchingRecipeIng = matchingRecipe.returnIngredients(ingredients);
   const formattedIngredients = matchingRecipeIng.map(ingredient => {
-    return `${ingredient.quantity.amount} ${ingredient.quantity.unit} of ${ingredient.name}`
+    return `${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`
   }).join('...');
   console.log(formattedIngredients)
   recipeModal.innerHTML = `
