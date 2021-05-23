@@ -49,7 +49,7 @@ function renderRecipes(recipes) {
               <img src='https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png' class='favorite-icon' id='favoriteIcon'/>
             </div>
             <div class='add-to-cook' id='addToCook'>
-              <img src='https://img.icons8.com/ios/50/000000/plus--v1.png' class='add-to-cook-icon' id='addToCookIcon'/>
+              <img src="https://img.icons8.com/android/24/000000/plus.png" class='add-to-cook-icon' id='addToCookIcon'>
             </div>
           </section>
             <div class='view-recipe-text' id='viewRecipeText'>
@@ -106,9 +106,6 @@ function filterByTag(event) {
 }
 
 function checkClickedRecipe(event) {
-  //instead of selecting the event.target.id, we are selecting the closest HTML
-  //article element to our event.target. This will give us the recipe.id
-  //every time.
   if (event.target.className === 'favorite-icon') {
     addToFavoritesList(event);
   } else if (event.target.className.includes('active')) {
@@ -117,9 +114,6 @@ function checkClickedRecipe(event) {
     addRemoveToCook(event);
   } else {
     const recipeId = parseInt(event.target.closest("article").id);
-    //changed your filter to find since we wanted one recipe returned, not
-    //an array with a recipe. Renamed to recipeInstance since it was
-    //returning a recipe class instance
     const matchingRecipe = recipeCollection.recipes.find(recipe => {
       if (recipe.id === recipeId) {
         return recipe;
@@ -130,6 +124,11 @@ function checkClickedRecipe(event) {
 }
 
 function displayRecipe(matchingRecipe) {
+  const matchingRecipeIng = matchingRecipe.returnIngredients(ingredients);
+  const formattedIngredients = matchingRecipeIng.map(ingredient => {
+    return `${ingredient.quantity.amount} ${ingredient.quantity.unit} of ${ingredient.name}`
+  }).join('...');
+  console.log(formattedIngredients)
   recipeModal.innerHTML = `
         <div class='modal-content' id='modal${matchingRecipe.id}'>
           <img id='closeModal' src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
@@ -138,12 +137,14 @@ function displayRecipe(matchingRecipe) {
             <img id="modalImg" src='${matchingRecipe.image}' alt="recipe image" class="modal-img">
           </div>
           <article class='modal-details' id='modalDetails'>
+           <div class='modal-ingredients'>
             <h3 class='ingredient-header'>Ingredients</h3>
-            <p class='ingredients' id='recipeIngredients'>ingredients</p>
+            <p class='ingredients' id='recipeIngredients'>${formattedIngredients}</p>
             <h3 class='cost-header'>Total Cost of Ingredients</h3>
-            <p class='total-cost' id='totalCost'>cost</p>
+            <p class='total-cost' id='totalCost'>${matchingRecipe.calculateCost(ingredients)}</p>
+           </div>
             <h3 class='recipe-instructions-header'>Instructions</h3>
-            <p class='instructions' id='instructions'>instructions</p>
+            <p class='instructions' id='instructions'>${matchingRecipe.returnInstructions()}</p>
           </article>
           <div class='modal-icons'>
             <div class='favorite-heart' id='favoriteHeart'>
@@ -171,11 +172,11 @@ function determineModalClick(event) {
 function addToFavoritesList(event) {
   const clickedRecipe = parseInt(event.target.closest('article').id);
   activate(event.target);
+
   const matchedRecipe = recipeCollection.recipes.find((recipe) => {
     return recipe.id === clickedRecipe;
   });
   currentUser.addToFavorites(matchedRecipe);
-  console.log(currentUser.favoriteRecipes)
   }
 
 function removeFromFavorites(event) {
