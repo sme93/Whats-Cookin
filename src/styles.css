@@ -32,22 +32,30 @@ body {
   position: sticky;
   top: 0;
   width: 100%;
+  height: 85px;
 }
 
 .greeting-header {
+  display: flex;
+  flex-direction: row;
   font-size: 24px;
   padding: 10px;
 }
 
 .welcome-icon {
   height: 77px;
-  margin-left: 70px;
+  margin-left: 50px;
 }
 
-.nav-buttons {
-  margin-left: 800px;
-  padding: 5px;
+.user-greeting {
+  padding: 20px;
+  font-size: 24px;
 }
+.nav-buttons {
+  padding: 20px;
+  align-items: center;
+}
+
 .my-favorites,
 .recipes-to-cook {
   font-size: 16px;
@@ -55,6 +63,7 @@ body {
   outline: none;
   background-color: transparent;
   border: none;
+  font-family: "Playfair Display", serif;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -166,15 +175,6 @@ img {
   display: none;
 }
 
-/* .modal-content {
-  background-color: white;
-  width: 50%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
 .modal-content {
   display: flex;
   flex-direction: column;
@@ -186,10 +186,45 @@ img {
   height: 100%;
 }
 
+.x-icon {
+  height: 40px;
+  width: 40px;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin: 30px;
+}
+
+.modal-img {
+  object-fit: cover;
+  height: 200px;
+  box-shadow: 6px 5px 9px lightgray;
+}
+
 .modal-details {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
+  border: 2px solid lightgray;
+}
+
+.modal-ingredients {
+  display: flex;
+  flex-direction: row;
+}
+
+.ingredient-header,
+.cost-header,
+.instructions-header {
+  margin: 20px;
+}
+
+.modal-cost {
+  display: flex;
 }
 
 .modal-icons {
@@ -199,15 +234,6 @@ img {
 
 }
 
-.x-icon {
-  height: 30px;
-  width: 30px;
-}
-
-.modal-img {
-  object-fit: cover;
-  height: 200px;
-}
 
 /* ASIDE */
 
