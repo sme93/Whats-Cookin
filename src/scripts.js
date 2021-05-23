@@ -10,11 +10,13 @@ const recipeModal = document.getElementById('modal')
 const recipeTags = document.getElementById('recipeTags');
 const favoriteRecipe = document.querySelector('.favorite-icon');
 const searchBar = document.getElementById('searchBar');
+const favoriteRecipes = document.getElementById('myFavoriteRecipes');
 let currentUser, recipeCollection, ingredients, recipes;
 
 window.addEventListener('load', onPageLoad);
 recipeTags.addEventListener('click', filterByTag);
 searchBar.addEventListener('keyup', searchNameOrIngredient);
+favoriteRecipes.addEventListener('click', displayFavoriteRecipes);
 allRecipesSection.addEventListener('click', () => {
   checkClickedRecipe(event);
 });
@@ -104,7 +106,6 @@ function filterByTag(event) {
   })
   const recipes = recipeCollection.filterByTag(radioButtonIds);
   renderRecipes(recipes);
-  console.log("recipes ", recipes);
 }
 
 function checkClickedRecipe(event) {
@@ -177,7 +178,6 @@ function addToFavoritesList(event) {
     return recipe.id === clickedRecipe;
   });
   currentUser.addToFavorites(matchedRecipe);
-  console.log(currentUser.favoriteRecipes)
 }
 
 function removeFromFavorites(event) {
@@ -200,8 +200,21 @@ function deactivate(element) {
 function searchNameOrIngredient(event) {
   const searchText = event.target.value;
   let nameResult = recipeCollection.filterByName(searchText);
-  console.log(nameResult)
   let ingredientResult = recipeCollection.filterByIngredient(searchText);
   let finalResult = [...nameResult, ...ingredientResult];
   return [...new Set(finalResult)];
+}
+
+function displayFavoriteRecipes(event) {
+  if (event.target.innerHTML === 'Show All Recipes') {
+    renderRecipes(recipeCollection.recipes);
+    favoriteRecipes.innerHTML = 'My Favorite Recipes';
+  } else {
+    favoriteRecipes.innerHTML = 'Show All Recipes';
+    if (!currentUser.favoriteRecipes.length) {
+      allRecipesSection.innerHTML = 'You have no favorite recipes!';
+    } else {
+      renderRecipes(currentUser.favoriteRecipes);
+    }
+  }
 }
