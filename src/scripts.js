@@ -190,6 +190,17 @@ function removeFromFavorites(event) {
   currentUser.removeFromFavorites(matchedRecipe);
   }
 
+function addRemoveToCook(event) {
+  const clickedRecipe = parseInt(event.target.closest('article').id);
+  const matchedRecipe = recipeCollection.recipes.find((recipe) => {
+    return recipe.id === clickedRecipe;
+  });
+  currentUser.addToRecipesToCook(matchedRecipe);
+  console.log(currentUser.recipesToCook);
+}
+
+
+
 function activate(element) {
   element.classList.add('active');
 }
