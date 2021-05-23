@@ -11,12 +11,14 @@ const recipeTags = document.getElementById('recipeTags');
 const favoriteRecipe = document.querySelector('.favorite-icon');
 const searchBar = document.getElementById('searchBar');
 const favoriteRecipes = document.getElementById('myFavoriteRecipes');
+const recipesToCook = document.getElementById('recipesToCook');
 let currentUser, recipeCollection, ingredients, recipes;
 
 window.addEventListener('load', onPageLoad);
 recipeTags.addEventListener('click', filterByTag);
 searchBar.addEventListener('keyup', searchNameOrIngredient);
 favoriteRecipes.addEventListener('click', displayFavoriteRecipes);
+recipesToCook.addEventListener('click', displayRecipesToCook);
 allRecipesSection.addEventListener('click', () => {
   checkClickedRecipe(event);
 });
@@ -109,20 +111,14 @@ function filterByTag(event) {
 }
 
 function checkClickedRecipe(event) {
-  //instead of selecting the event.target.id, we are selecting the closest HTML
-  //article element to our event.target. This will give us the recipe.id
-  //every time.
   if (event.target.className === 'favorite-icon') {
     addToFavoritesList(event);
   } else if (event.target.className.includes('active')) {
     removeFromFavorites(event);
   } else if (event.target.id === 'addToCookIcon') {
-    addRemoveToCook(event);
+    addToRecipesToCook(event);
   } else {
     const recipeId = parseInt(event.target.closest("article").id);
-    //changed your filter to find since we wanted one recipe returned, not
-    //an array with a recipe. Renamed to recipeInstance since it was
-    //returning a recipe class instance
     const matchingRecipe = recipeCollection.recipes.find(recipe => {
       if (recipe.id === recipeId) {
         return recipe;
@@ -215,6 +211,20 @@ function displayFavoriteRecipes(event) {
       allRecipesSection.innerHTML = 'You have no favorite recipes!';
     } else {
       renderRecipes(currentUser.favoriteRecipes);
+    }
+  }
+}
+
+function displayRecipesToCook(event) {
+  if (event.target.innerHTML === 'Show All Recipes') {
+    renderRecipes(recipeCollection.recipes);
+    recipesToCook.innerHTML = 'My Recipes To Cook';
+  } else {
+    recipesToCook.innerHTML = 'Show All Recipes';
+    if (!currentUser.recipesToCook.length) {
+      allRecipesSection.innerHTML = 'Find yourself a recipe to cook!';
+    } else {
+      renderRecipes(currentUser.recipesToCook);
     }
   }
 }
