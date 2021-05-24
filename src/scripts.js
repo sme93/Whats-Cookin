@@ -96,7 +96,11 @@ function renderFilterTags(recipeCollection) {
       </div>`
   }).join('');
 
-  allFilters.innerHTML = tagMarkup;
+  const clearFilters = `<div class='clear-filters'>
+                          <button class='button' id='clearFilters'>Clear Filters</button>
+                        </div>`
+
+  allFilters.innerHTML = tagMarkup + clearFilters;
 }
 
 function filterUIByTag(event) {
@@ -108,6 +112,16 @@ function filterUIByTag(event) {
     })
     const recipes = recipeCollection.filterByTag(radioButtonIds);
     renderRecipes(recipes);
+    return
+  }
+  event.preventDefault();
+  if (event.target.id === 'clearFilters') {
+    renderRecipes(recipeCollection.recipes);
+    const radioButtons = document.querySelectorAll('.recipe-tag-input.clicked');
+    radioButtons.forEach(button => {
+      button.classList.remove('clicked');
+      button.checked = false;
+    });
   }
 }
 
