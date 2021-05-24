@@ -134,7 +134,7 @@ function displayRecipe(matchingRecipe) {
   }).join('...');
   console.log(formattedIngredients)
   recipeModal.innerHTML = `
-        <div class='modal-content' id='modal${matchingRecipe.id}'>
+        <article class='modal-content' id='${matchingRecipe.id}'>
           <img id='closeModal' src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
           <div class='modal-header'>
             <img id="modalImg" src='${matchingRecipe.image}' alt="recipe image" class="modal-img">
@@ -150,7 +150,7 @@ function displayRecipe(matchingRecipe) {
             <p class='total-cost' id='totalCost'>${matchingRecipe.calculateCost(ingredients)}</p>
            <div class='modal-cost'>
           </article>
-            <h3 class='recipe-instructions-header'>Instructions</h3>
+            <h3 class='instructions-header'>Instructions</h3>
             <p class='instructions' id='instructions'>${matchingRecipe.returnInstructions()}</p>
           <div class='modal-icons'>
             <div class='favorite-heart' id='favoriteHeart'>
@@ -160,7 +160,7 @@ function displayRecipe(matchingRecipe) {
               <img src='https://img.icons8.com/ios/50/000000/plus--v1.png' class='add-to-cook-icon' id='addToCookIcon'/>
             </div>
           </div>
-        </div>`
+        <article>`
   openModal();
 }
 
@@ -172,6 +172,12 @@ function determineModalClick(event) {
   if (event.target.id === 'closeModal') {
     recipeModal.innerHTML = '';
     recipeModal.style.display = 'none';
+  } else if (event.target.className === 'favorite-icon') {
+    addToFavoritesList(event);
+  } else if (event.target.className.includes('active')) {
+    removeFromFavorites(event);
+  } else if (event.target.id === 'addToCookIcon') {
+    addToCook(event);
   }
 }
 
