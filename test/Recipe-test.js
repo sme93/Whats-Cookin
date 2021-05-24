@@ -6,7 +6,6 @@ import { ingredientsData } from '../src/testData/ingredients';
 
 let recipe;
 
-
 describe('Recipe', () => {
   beforeEach(() => {
     recipe = new Recipe(recipeData[0]);
@@ -19,7 +18,7 @@ describe('Recipe', () => {
   it('should store its id', () => {
     expect(recipe.id).to.equal(recipeData[0].id);
   });
-  
+
   it('should store its image', () => {
     expect(recipe.image).to.equal(recipeData[0].image);
   });
@@ -68,4 +67,4 @@ describe('Recipe', () => {
 
     expect(recipeInstructions).to.contain(' 350 degrees.. 4. Place the cookie');
   });
-});    
+});
