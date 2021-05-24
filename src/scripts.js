@@ -54,7 +54,7 @@ function renderRecipes(recipes) {
               <img src='https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png' class='favorite-icon' id='favoriteIcon'/>
             </div>
             <div class='add-to-cook' id='addToCook'>
-              <img src="https://img.icons8.com/android/24/000000/plus.png" class='add-to-cook-icon' id='addToCookIcon'>
+              <img src="https://img.icons8.com/ios/50/000000/plus--v1.png" class='add-to-cook-icon' id='addToCookIcon'>
             </div>
           </section>
             <div class='view-recipe-text' id='viewRecipeText'>
