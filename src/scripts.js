@@ -82,7 +82,7 @@ function renderFilterTags(recipeCollection) {
   }, {});
 
   const tagMarkup = Object.entries(recipeTags).map(tag => {
-    const [tagName, quantity] = tag
+    const [tagName, quantity] = tag;
     return `
       <div class='recipe-tag'>
         <input
@@ -184,7 +184,7 @@ function addToFavoritesList(event) {
     return recipe.id === clickedRecipe;
   });
   currentUser.addToFavorites(matchedRecipe);
-  }
+}
 
 
 function removeFromFavorites(event) {
@@ -206,10 +206,14 @@ function deactivate(element) {
 
 function searchNameOrIngredient(event) {
   const searchText = event.target.value;
-  let nameResult = recipeCollection.filterByName(searchText);
-  let ingredientResult = recipeCollection.filterByIngredient(searchText);
-  let finalResult = [...nameResult, ...ingredientResult];
-  return [...new Set(finalResult)];
+  if (favoriteRecipes.innerHTML === 'Show All Recipes') {
+    let favoriteResult = currentUser.findFavorites(searchText);
+    renderRecipes(favoriteResult);
+  };
+  // let nameResult = recipeCollection.filterByName(searchText);
+  // let ingredientResult = recipeCollection.filterByIngredient(searchText);
+  // let finalResult = [...nameResult, ...ingredientResult];
+  //return [...new Set(finalResult)];
 }
 
 function displayFavoriteRecipes(event) {
