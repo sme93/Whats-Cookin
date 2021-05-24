@@ -71,12 +71,12 @@ describe('User', () => {
       expect(user.filterByTag(['snack', 'antipasti']))
         .to.deep.equal([recipeData[0], recipeData[7]]);
     });
-  
+
     it('should be able to search favoriteRecipes by name', () => {
       expect(user.findFavorites('cookie')).to.deep.equal([recipeData[0]]);
     });
 
-    it(`should be able to search favoriteRecipes, 
+    it(`should be able to search favoriteRecipes,
               without regard to capitalization`, () => {
       expect(user.findFavorites('PUDDING')).to.deep.equal([recipeData[0]]);
     });
