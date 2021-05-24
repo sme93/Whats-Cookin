@@ -45,13 +45,18 @@ function greetUser() {
 }
 
 function renderRecipes(recipes) {
+  const userFavorites = getUsersFavoriteIds();
   const recipeMarkup = recipes.map(recipe => {
+    const isFavorite = userFavorites.includes(recipe.id);
+    const favoriteClass = isFavorite ? 'active' : '';
+    //if currentUser.favoriteRecipes ids includes recipe.id then
+    //add active to the favorite icon class
     return ` <article id=${recipe.id}>
         <div class='recipe-card'>
           <img src=${recipe.image} class='recipe-img'>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
             <div class='favorite-heart' id='favoriteHeart'>
-              <img src='https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png' class='favorite-icon' id='favoriteIcon'/>
+              <img src='https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png' class='favorite-icon ${favoriteClass}' id='favoriteIcon'/>
             </div>
             <div class='add-to-cook' id='addToCook'>
               <img src="https://img.icons8.com/ios/50/000000/plus--v1.png" class='add-to-cook-icon' id='addToCookIcon'>
@@ -64,6 +69,12 @@ function renderRecipes(recipes) {
   }).join('');
 
   allRecipesSection.innerHTML = recipeMarkup;
+}
+
+function getUsersFavoriteIds() {
+  return currentUser.favoriteRecipes.map(recipe => {
+    return recipe.id;
+  })
 }
 
 function renderFilterTags(recipeCollection) {
@@ -126,9 +137,9 @@ function filterUIByTag(event) {
 }
 
 function determineRecipeClick(event) {
-  if (event.target.className === 'favorite-icon') {
+  if (event.target.className.includes('favorite-icon')) {
     addToFavoritesList(event);
-  } else if (event.target.className.includes('active')) {
+  } else if (event.target.className.includes('active') && event.target.className.includes('favorite-icon')) {
     removeFromFavorites(event);
   } else if (event.target.id === 'addToCookIcon') {
     addToCook(event);
