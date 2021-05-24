@@ -35,7 +35,15 @@ describe('Recipe Collection', () => {
     expect(recipeCollection.filterByName('Ambrosia Cupcakes').length).to.equal(1);
   });
 
+  it('Should return recipes based on name, regardless of capitalization of input', () => {
+    expect(recipeCollection.filterByName('AmBrosia CUPCAKES').length).to.equal(1);
+  });
+
   it('Should filter recipes based on an ingredient', () => {
     expect(recipeCollection.filterByIngredient('eggs').length).to.equal(3);
+  });
+
+  it('Should return recipes based on an ingredient, regardless of capitalization of input', () => {
+    expect(recipeCollection.filterByIngredient('EGGS').length).to.equal(3);
   });
 })

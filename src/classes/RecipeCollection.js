@@ -10,7 +10,7 @@ class RecipeCollection {
         if (recipe.tags.includes(tag)) {
           searchedRecipes.push(recipe)
         }
-      })
+      });
       return searchedRecipes;
     }, [])
     return [...new Set(recipeMatches)];
@@ -19,7 +19,7 @@ class RecipeCollection {
   filterByName(input) {
     const recipesWithInput = this.recipes.filter(recipe => {
       return recipe.name.toLowerCase().includes(input.toLowerCase())
-    })
+    });
     return recipesWithInput;
   }
 
@@ -36,7 +36,7 @@ class RecipeCollection {
           recipesWithInput.push(recipe);
         }
       });
-    })
+    });
     return recipesWithInput;
   }
 }
