@@ -24,11 +24,11 @@ describe('Recipe Collection', () => {
   });
 
   it('Should filter recipes by one tag', () => {
-    expect(recipeCollection.filterByTag(['antipasti']).length).to.equal(9)
+    expect(recipeCollection.filterByTag(['antipasti']).length).to.equal(2)
   });
 
   it('Should filter recipes by multiple tags', () => {
-    expect(recipeCollection.filterByTag(['antipasti', 'sauce']).length).to.equal(10)
+    expect(recipeCollection.filterByTag(['antipasti', 'sauce']).length).to.equal(3)
   });
 
   it('Should filter recipes based on name', () => {
@@ -36,6 +36,6 @@ describe('Recipe Collection', () => {
   });
 
   it('Should filter recipes based on an ingredient', () => {
-    expect(recipeCollection.filterByIngredient('eggs').length).to.equal(13);
+    expect(recipeCollection.filterByIngredient('eggs').length).to.equal(3);
   });
 })

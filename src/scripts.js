@@ -87,10 +87,10 @@ function renderFilterTags(recipeCollection) {
         <input
           class='recipe-tag-input'
           type='radio'
-          id=${tagName}
-          name=${tagName}
-          value=${tagName}>
-        <label for=${tagName}>${tagName}
+          id="${tagName}"
+          name="${tagName}"
+          value="${tagName}">
+        <label for="${tagName}">${tagName}
           <span class='recipe-tag-quantity'>  (${quantity})</span>
         </label>
       </div>`
