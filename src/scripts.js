@@ -18,12 +18,15 @@ recipeTags.addEventListener('click', filterUIByTag);
 searchBar.addEventListener('keyup', searchNameOrIngredient);
 favoriteRecipes.addEventListener('click', displayFavoriteRecipes);
 recipesToCook.addEventListener('click', displayRecipesToCook);
-allRecipesSection.addEventListener('click', () => {
-  determineRecipeClick(event);
-});
-recipeModal.addEventListener('click', () => {
-  determineModalClick(event);
-});
+allRecipesSection.addEventListener('click', determineRecipeClick);
+recipeModal.addEventListener('click', determineModalClick);
+
+const HEART_ICON = 
+  `https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png`;
+const PLUS_ICON = 
+  `https://img.icons8.com/ios/50/000000/plus--v1.png`;
+const CLOSE_ICON = 
+  `https://img.icons8.com/fluent-systems-regular/48/000000/x.png`;
 
 function onPageLoad() {
   fetchData().then(allData => {
@@ -49,17 +52,21 @@ function renderRecipes(recipes) {
   const recipeMarkup = recipes.map(recipe => {
     const isFavorite = userFavorites.includes(recipe.id);
     const favoriteClass = isFavorite ? 'active' : '';
-    //if currentUser.favoriteRecipes ids includes recipe.id then
-    //add active to the favorite icon class
     return ` <article id=${recipe.id}>
         <div class='recipe-card'>
           <img src=${recipe.image} class='recipe-img'>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
             <div class='favorite-heart' id='favoriteHeart'>
-              <img src='https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png' class='favorite-icon ${favoriteClass}' id='favoriteIcon'/>
+              <img 
+                src=${HEART_ICON} 
+                class='favorite-icon ${favoriteClass}' 
+                id='favoriteIcon'/>
             </div>
             <div class='add-to-cook' id='addToCook'>
-              <img src="https://img.icons8.com/ios/50/000000/plus--v1.png" class='add-to-cook-icon' id='addToCookIcon'>
+              <img 
+                src=${PLUS_ICON} 
+                class='add-to-cook-icon' 
+                id='addToCookIcon'>
             </div>
           </section>
             <div class='view-recipe-text' id='viewRecipeText'>
@@ -107,9 +114,10 @@ function renderFilterTags(recipeCollection) {
       </div>`
   }).join('');
 
-  const clearFilters = `<div class='clear-filters'>
-                          <button class='button' id='clearFilters'>Clear Filters</button>
-                        </div>`
+  const clearFilters = `
+  <div class='clear-filters'>
+    <button class='button' id='clearFilters'>Clear Filters</button>
+  </div>`
 
   allFilters.innerHTML = tagMarkup + clearFilters;
 }
@@ -138,9 +146,11 @@ function filterUIByTag(event) {
 
 function determineRecipeClick(event) {
   if (event.target.className.includes('favorite-icon')) {
-    addToFavoritesList(event);
-  } else if (event.target.className.includes('active') && event.target.className.includes('favorite-icon')) {
-    removeFromFavorites(event);
+    if (event.target.className.includes('active')) {
+      removeFromFavorites(event);
+    } else {
+      addToFavoritesList(event);
+    }
   } else if (event.target.id === 'addToCookIcon') {
     addToCook(event);
   } else {
@@ -155,36 +165,58 @@ function determineRecipeClick(event) {
 }
 
 function displayRecipe(matchingRecipe) {
+  const userFavorites = getUsersFavoriteIds();
+  const isFavorite = userFavorites.includes(matchingRecipe.id);
+  const favoriteClass = isFavorite ? 'active' : '';
   const matchingRecipeIng = matchingRecipe.returnIngredients(ingredients);
   const formattedIngredients = matchingRecipeIng.map(ingredient => {
+    // eslint-disable-next-line max-len
     return `${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`
   }).join('...');
   console.log(formattedIngredients)
   recipeModal.innerHTML = `
         <article class='modal-content' id='${matchingRecipe.id}'>
-          <img id='closeModal' src='https://img.icons8.com/fluent-systems-regular/48/000000/x.png' class='x-icon'/>
+          <img id='closeModal' src=${CLOSE_ICON} class='x-icon'/>
           <div class='modal-header'>
-            <img id="modalImg" src='${matchingRecipe.image}' alt="recipe image" class="modal-img">
-            <h2 class='modal-header' id='modalHeader'>${matchingRecipe.name}</h2>
+            <img 
+              id="modalImg" 
+              src='${matchingRecipe.image}' 
+              alt="recipe image" 
+              class="modal-img">
+            <h2 
+              class='modal-header' 
+              id='modalHeader'>${matchingRecipe.name}</h2>
           </div>
           <article class='modal-details' id='modalDetails'>
            <div class='modal-ingredients'>
             <h3 class='ingredient-header'>Ingredients</h3>
-            <p class='ingredients' id='recipeIngredients'>${formattedIngredients}</p>
+            <p 
+              class='ingredients' 
+              id='recipeIngredients'>${formattedIngredients}</p>
            </div>
            <div class='modal-cost'>
             <h3 class='cost-header'>Total Cost of Ingredients</h3>
-            <p class='total-cost' id='totalCost'>${matchingRecipe.calculateCost(ingredients)}</p>
+            <p 
+              class='total-cost' 
+              id='totalCost'>${matchingRecipe.calculateCost(ingredients)}</p>
            <div class='modal-cost'>
           </article>
             <h3 class='instructions-header'>Instructions</h3>
-            <p class='instructions' id='instructions'>${matchingRecipe.returnInstructions()}</p>
+            <p 
+              class='instructions' 
+              id='instructions'>${matchingRecipe.returnInstructions()}</p>
           <div class='modal-icons'>
             <div class='favorite-heart' id='favoriteHeart'>
-              <img src='https://img.icons8.com/pastel-glyph/64/000000/hearts--v1.png' class='favorite-icon' id='favoriteIcon'/>
+              <img 
+                src=${HEART_ICON} 
+                class='favorite-icon ${favoriteClass}' 
+                id='favoriteIcon'/>
             </div>
             <div class='add-to-cook' id='addToCook'>
-              <img src='https://img.icons8.com/ios/50/000000/plus--v1.png' class='add-to-cook-icon' id='addToCookIcon'/>
+              <img 
+                src=${PLUS_ICON} 
+                class='add-to-cook-icon' 
+                id='addToCookIcon'/>
             </div>
           </div>
         <article>`
