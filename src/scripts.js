@@ -14,7 +14,7 @@ const recipesToCook = document.getElementById('recipesToCook');
 let currentUser, recipeCollection, ingredients, recipes;
 
 window.addEventListener('load', onPageLoad);
-recipeTags.addEventListener('click', filterByTag);
+recipeTags.addEventListener('click', filterUIByTag);
 searchBar.addEventListener('keyup', searchNameOrIngredient);
 favoriteRecipes.addEventListener('click', displayFavoriteRecipes);
 recipesToCook.addEventListener('click', displayRecipesToCook);
@@ -99,14 +99,16 @@ function renderFilterTags(recipeCollection) {
   allFilters.innerHTML = tagMarkup;
 }
 
-function filterByTag(event) {
-  event.target.className += ' clicked';
-  const radioButtons = document.querySelectorAll('.recipe-tag-input.clicked');
-  const radioButtonIds = [...radioButtons].map(button => {
-    return button.id;
-  })
-  const recipes = recipeCollection.filterByTag(radioButtonIds);
-  renderRecipes(recipes);
+function filterUIByTag(event) {
+  if (event.target.type === 'radio') {
+    event.target.className += ' clicked';
+    const radioButtons = document.querySelectorAll('.recipe-tag-input.clicked');
+    const radioButtonIds = [...radioButtons].map(button => {
+      return button.id;
+    })
+    const recipes = recipeCollection.filterByTag(radioButtonIds);
+    renderRecipes(recipes);
+  }
 }
 
 function determineRecipeClick(event) {
