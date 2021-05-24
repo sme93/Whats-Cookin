@@ -50,7 +50,7 @@ body {
 .user-greeting {
   padding: 20px;
   font-size: 24px;
-  color:  #3CB371;
+  color: #3cb371;
 }
 .nav-buttons {
   padding: 20px;
@@ -71,10 +71,9 @@ body {
 
 .recipes-to-cook:hover,
 .my-favorites:hover {
-  border-bottom: 2px solid #3CB371;
+  border-bottom: 2px solid #3cb371;
   cursor: pointer;
 }
-
 
 /* HEADER */
 
@@ -131,6 +130,7 @@ h2 {
   display: flex;
   justify-content: space-evenly;
   margin: 0px;
+  min-height: 72px;
 }
 
 .recipe-img {
@@ -149,7 +149,6 @@ h2 {
   cursor: pointer;
 }
 
-
 .view-recipe-text {
   margin: 0px 0px 5px 0px;
   height: 60px;
@@ -162,7 +161,6 @@ h2 {
   background-image: url(https://img.icons8.com/fluent/48/000000/hearts.png);
   height: 48px;
 }
-
 
 /* RECIPE MODAL */
 
@@ -248,7 +246,7 @@ h2 {
 /* ASIDE */
 
 .filter-section {
-  border-left: 3px solid #3CB371;
+  border-left: 3px solid #3cb371;
   display: flex;
   flex-direction: column;
   width: 275px;

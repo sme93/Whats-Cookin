@@ -223,10 +223,10 @@ function searchNameOrIngredient(event) {
     let favoriteResult = currentUser.findFavorites(searchText);
     renderRecipes(favoriteResult);
   } else {
-    // let nameResult = recipeCollection.filterByName(searchText);
-    // let ingredientResult = recipeCollection.filterByIngredient(searchText);
-    // let finalResult = [...nameResult, ...ingredientResult];
-    //return [...new Set(finalResult)];
+    let nameResult = recipeCollection.filterByName(searchText);
+    let ingredientResult = recipeCollection.filterByIngredient(searchText);
+    let finalResult = [...nameResult, ...ingredientResult];
+    renderRecipes([...new Set(finalResult)]);
   }
 }
 
