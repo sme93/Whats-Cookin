@@ -50,6 +50,7 @@ body {
 .user-greeting {
   padding: 20px;
   font-size: 24px;
+  color:  #3CB371;
 }
 .nav-buttons {
   padding: 20px;
@@ -68,13 +69,12 @@ body {
   letter-spacing: 2px;
 }
 
-.recipes-to-cook:hover {
-  border-bottom: 2px solid #3CB371;
-}
-
+.recipes-to-cook:hover,
 .my-favorites:hover {
   border-bottom: 2px solid #3CB371;
+  cursor: pointer;
 }
+
 
 /* HEADER */
 
@@ -108,7 +108,7 @@ h2 {
 }
 
 .all-recipes {
-  margin: 45px;
+  margin: 40px;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: minmax(200px, 1fr) 1rem minmax(200px, 1fr) 1rem
@@ -120,7 +120,6 @@ h2 {
 /* RECIPE CARD */
 
 .recipe-card {
-  /* border: 2px solid grey; */
   display: flex;
   flex-direction: column;
   height: 300px;
@@ -131,7 +130,7 @@ h2 {
 .recipe-card-bottom {
   display: flex;
   justify-content: space-evenly;
-  margin: 5px;
+  margin: 0px;
 }
 
 .recipe-img {
@@ -139,10 +138,16 @@ h2 {
   position: relative;
 }
 
-img {
+.add-to-cook-icon,
+.favorite-icon {
   height: 40px;
 }
 
+.favorite-icon:hover,
+.add-to-cook-icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
 
 
 .view-recipe-text {
@@ -153,9 +158,9 @@ img {
   border-bottom: 2px solid black;
 }
 
-
 .active {
-  background-color: red;
+  background-image: url(https://img.icons8.com/fluent/48/000000/hearts.png);
+  height: 48px;
 }
 
 
@@ -182,8 +187,10 @@ img {
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  height: 100%;
+  width: 60%;
+  height: 80%;
+  overflow-y: scroll;
+  box-shadow: 0px 7px 29px 0px black;
 }
 
 .x-icon {
@@ -197,6 +204,7 @@ img {
   align-items: center;
   justify-content: space-around;
   margin: 30px;
+  font-size: 32px;
 }
 
 .modal-img {
@@ -230,11 +238,13 @@ img {
 .modal-icons {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-
+  justify-content: center;
 }
 
-
+.add-to-cook,
+.favorite-heart {
+  padding: 10px;
+}
 /* ASIDE */
 
 .filter-section {
@@ -255,6 +265,10 @@ img {
 
 .recipe-tag-input {
   margin-right: 8px;
+}
+
+.recipe-tag-input:hover {
+  cursor: pointer;
 }
 
 .recipe-tag-quantity {
