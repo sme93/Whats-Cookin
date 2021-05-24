@@ -14,7 +14,7 @@ const recipesToCook = document.getElementById('recipesToCook');
 let currentUser, recipeCollection, ingredients, recipes;
 
 window.addEventListener('load', onPageLoad);
-recipeTags.addEventListener('click', filterByTag);
+recipeTags.addEventListener('click', filterUIByTag);
 searchBar.addEventListener('keyup', searchNameOrIngredient);
 favoriteRecipes.addEventListener('click', displayFavoriteRecipes);
 recipesToCook.addEventListener('click', displayRecipesToCook);
@@ -87,26 +87,42 @@ function renderFilterTags(recipeCollection) {
         <input
           class='recipe-tag-input'
           type='radio'
-          id=${tagName}
-          name=${tagName}
-          value=${tagName}>
-        <label for=${tagName}>${tagName}
+          id="${tagName}"
+          name="${tagName}"
+          value="${tagName}">
+        <label for="${tagName}">${tagName}
           <span class='recipe-tag-quantity'>  (${quantity})</span>
         </label>
       </div>`
   }).join('');
 
-  allFilters.innerHTML = tagMarkup;
+  const clearFilters = `<div class='clear-filters'>
+                          <button class='button' id='clearFilters'>Clear Filters</button>
+                        </div>`
+
+  allFilters.innerHTML = tagMarkup + clearFilters;
 }
 
-function filterByTag(event) {
-  event.target.className += ' clicked';
-  const radioButtons = document.querySelectorAll('.recipe-tag-input.clicked');
-  const radioButtonIds = [...radioButtons].map(button => {
-    return button.id;
-  })
-  const recipes = recipeCollection.filterByTag(radioButtonIds);
-  renderRecipes(recipes);
+function filterUIByTag(event) {
+  if (event.target.type === 'radio') {
+    event.target.className += ' clicked';
+    const radioButtons = document.querySelectorAll('.recipe-tag-input.clicked');
+    const radioButtonIds = [...radioButtons].map(button => {
+      return button.id;
+    })
+    const recipes = recipeCollection.filterByTag(radioButtonIds);
+    renderRecipes(recipes);
+    return
+  }
+  event.preventDefault();
+  if (event.target.id === 'clearFilters') {
+    renderRecipes(recipeCollection.recipes);
+    const radioButtons = document.querySelectorAll('.recipe-tag-input.clicked');
+    radioButtons.forEach(button => {
+      button.classList.remove('clicked');
+      button.checked = false;
+    });
+  }
 }
 
 function determineRecipeClick(event) {
@@ -223,10 +239,10 @@ function searchNameOrIngredient(event) {
     let favoriteResult = currentUser.findFavorites(searchText);
     renderRecipes(favoriteResult);
   } else {
-    // let nameResult = recipeCollection.filterByName(searchText);
-    // let ingredientResult = recipeCollection.filterByIngredient(searchText);
-    // let finalResult = [...nameResult, ...ingredientResult];
-    //return [...new Set(finalResult)];
+    let nameResult = recipeCollection.filterByName(searchText);
+    let ingredientResult = recipeCollection.filterByIngredient(searchText);
+    let finalResult = [...nameResult, ...ingredientResult];
+    renderRecipes([...new Set(finalResult)]);
   }
 }
 

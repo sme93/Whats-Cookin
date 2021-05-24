@@ -20,24 +20,24 @@ class RecipeCollection {
     const recipesWithInput = this.recipes.filter(recipe => {
       return recipe.name.toLowerCase().includes(input.toLowerCase())
     })
-    return recipesWithInput
+    return recipesWithInput;
   }
 
   filterByIngredient(input) {
     const ingredientMatch = this.ingredients.find(ingredient => {
-      if (ingredient.name === input.toLowerCase()) {
-        return ingredient
+      if (ingredient.name.includes(input.toLowerCase())) {
+        return ingredient;
       }
     });
     const recipesWithInput = [];
     this.recipes.forEach(recipe => {
-      return recipe.ingredients.filter(ingredient => {
+      recipe.ingredients.filter(ingredient => {
         if (ingredient.id === ingredientMatch.id) {
-          recipesWithInput.push(recipe.name)
+          recipesWithInput.push(recipe);
         }
       });
     })
-    return recipesWithInput
+    return recipesWithInput;
   }
 }
 
