@@ -188,19 +188,19 @@ function displayRecipe(matchingRecipe) {
           </div>
           <article class='modal-details' id='modalDetails'>
            <div class='modal-ingredients'>
-            <h3 class='ingredient-header'>Ingredients</h3>
+            <h3 class='ingredient-header'>Ingredients:</h3>
             <p
               class='ingredients'
               id='recipeIngredients'>${formattedIngredients}</p>
            </div>
            <div class='modal-cost'>
-            <h3 class='cost-header'>Total Cost of Ingredients</h3>
+            <h3 class='cost-header'>Cost of Ingredients:</h3>
             <p
               class='total-cost'
               id='totalCost'>${matchingRecipe.calculateCost(ingredients)}</p>
            <div class='modal-cost'>
           </article>
-            <h3 class='instructions-header'>Instructions</h3>
+            <h3 class='instructions-header'>Instructions:</h3>
             <p
               class='instructions'
               id='instructions'>${matchingRecipe.returnInstructions()}</p>
@@ -315,7 +315,7 @@ function displayRecipesToCook(event) {
     if (!currentUser.recipesToCook.length) {
       allRecipesSection.innerHTML = `
       <div class='no-recipes-text'>
-        <p class='no-recipes'>Add a recipe to cook tonight!</p>
+        <p class='no-recipes'>Add a few recipes to cook!</p>
       </div>`
     } else {
       renderRecipes(currentUser.recipesToCook);
