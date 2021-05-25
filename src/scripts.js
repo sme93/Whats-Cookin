@@ -29,18 +29,26 @@ const CLOSE_ICON =
   `https://img.icons8.com/fluent-systems-regular/48/000000/x.png`;
 
 function onPageLoad() {
-  fetchData().then(allData => {
-    recipes = allData.recipes.map(recipe => {
-      return new Recipe(recipe)
-    });
-    const randomUserIndex = Math.floor(Math.random() * allData.users.length);
-    currentUser = new User(allData.users[randomUserIndex]);
-    ingredients = allData.ingredients;
-    recipeCollection = new RecipeCollection(recipes, ingredients);
-    greetUser();
-    renderRecipes(recipeCollection.recipes);
-    renderFilterTags(recipeCollection);
-  });
+  fetchData()
+    .then(allData => {
+      recipes = allData.recipes.map(recipe => {
+        return new Recipe(recipe)
+      });
+      const randomUserIndex = Math.floor(Math.random() * allData.users.length);
+      currentUser = new User(allData.users[randomUserIndex]);
+      ingredients = allData.ingredients;
+      recipeCollection = new RecipeCollection(recipes, ingredients);
+      greetUser();
+      renderRecipes(recipeCollection.recipes);
+      renderFilterTags(recipeCollection);
+    })
+    .catch(err => displayPageLevelError());
+}
+
+function displayPageLevelError() {
+  userName.innerHTML = `~ Follow us on IG ~ @rosemary&sage`
+  allRecipesSection.innerHTML = `Ooops, we seem to be experiencing some
+    technical difficulties!`
 }
 
 function greetUser() {
@@ -174,6 +182,7 @@ function displayRecipe(matchingRecipe) {
     return `<br><strong>${ingredient.name}</strong> - ${ingredient.quantity.amount} ${ingredient.quantity.unit}</br>`
   }).join('');
   const matchingRecipeInst = matchingRecipe.returnInstructions()
+  console.log("matchingRecipeInst ", matchingRecipeInst);
   const formattedInstructions = matchingRecipeInst.map(instruction => {
     return `<br><em>Step</em> ${instruction}</br>`
   }).join('')
@@ -235,13 +244,13 @@ function determineModalClick(event) {
     recipeModal.innerHTML = '';
     recipeModal.style.display = 'none';
   } else if (event.target.className.includes('favorite-icon')) {
-      if (event.target.className.includes('active')) {
-        removeFromFavorites(event);
-      } else {
-        addToFavoritesList(event);
-      }
-    } else if (event.target.id === 'addToCookIcon') {
-      addToCook(event);
+    if (event.target.className.includes('active')) {
+      removeFromFavorites(event);
+    } else {
+      addToFavoritesList(event);
+    }
+  } else if (event.target.id === 'addToCookIcon') {
+    addToCook(event);
   }
 }
 
