@@ -24,13 +24,13 @@ To solidify and demonstrate the understanding of:
 
 ## Functionality
 
-- Upon opening the application, user is greeted and will see all recipes displayed. User may click on any recipe for more details such as instructions, ingredients, and cost of ingredients.
+- Upon opening the application, user is greeted and will see all recipes displayed. User may click on any recipe for more details such as instructions, ingredients, and cost of ingredients:
 ![Main Page](src/assets/main-page.gif)
 
-- User is able to add a recipe to favorites or to a list or recipes to cook, either on the detailed recipe section, or on the main page.  User may then click on *My Favorite Recipes* or *My Recipes to Cook* to view their saved recipes.
+- User is able to add a recipe to favorites or to a list or recipes to cook, either on the detailed recipe section, or on the main page.  User may then click on *My Favorite Recipes* or *My Recipes to Cook* to view their saved recipes:
 ![Favorite/To Cook](src/assets/Favorite.gif)
 
-- User may also search for a recipe by name or by ingredient. They may also filter by recipe type and can clear these filters to see all recipes displayed.
+- User may also search for a recipe by name or by ingredient. They may also filter by recipe type and can clear these filters to see all recipes displayed:
 ![Search/Filter](src/assets/search_filter.gif)
 
 
