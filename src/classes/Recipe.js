@@ -42,10 +42,10 @@ class Recipe {
 
   returnInstructions() {
     const numberedInstructions = this.instructions.map(instruction => {
-      return `${instruction.number}. ${instruction.instruction}.`
+      return `${instruction.number}. ${instruction.instruction}`
     });
-    
-    return numberedInstructions.join(' ');
+
+    return numberedInstructions;
   }
 }
 
