@@ -10,7 +10,7 @@
 - [Contributors](#contributors)
 
 ## Overview and Project Goals
-Rosemary & Sage [(What's Cookin')](https://frontend.turing.edu/projects/whats-cookin.html) is an application built in week 8 of [Turing School of Software and Design](https://turing.io/).  The goal of this paired project was to build an application where users can view a collection of recipes, search for recipe by name, tag, and ingredient, and add favorites or recipes to cook.
+Rosemary & Sage is an application built in week 8 of [Turing School of Software and Design](https://turing.io/).  The goal of this paired [project](https://frontend.turing.edu/projects/whats-cookin.html) was to build an application where users can view a collection of recipes, search for recipe by name, tag, and ingredient, and add favorites or recipes to cook.
 
 ### Learning Goals
 To solidify and demonstrate the understanding of:
