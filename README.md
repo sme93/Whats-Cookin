@@ -1,22 +1,76 @@
-# What's Cookin'? Starter Kit 
+# Rosemary & Sage
 
-The details of this project are outlined in the <a href="https://frontend.turing.io/projects/whats-cookin.html" target="\__blank">project spec</a>.
+### Table of Contents
+- [Overview](#overview-and-project-goals)
+- [Learning Goals](#learning-goals)
+- [Functionality](#functionality)
+- [Instructions For Running Project](#instructions-for-running-project-locally)
+- [How To Contribute](#want-to-contribute)
+- [Future Additions](#future-additions)
+- [Contributors](#contributors)
 
-## Set Up 
+## Overview and Project Goals
+Rosemary & Sage [(What's Cookin')](https://frontend.turing.edu/projects/whats-cookin.html) is an application built in week 8 of [Turing School of Software and Design](https://turing.io/).  The goal of this paired project was to build an application where users can view a collection of recipes, search for recipe by name, tag, and ingredient, and add favorites or recipes to cook.
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. Both group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
+### Learning Goals
+To solidify and demonstrate the understanding of:
+
+- Creating a robust testing suite using TDD
+- Using ES6 syntax to create and interact with JavaScript classes
+- Utilizing object and array prototype methods to perform data manipulation
+- Implementing responsive layout
+- Making network requests to API endpoints to retrieve and manipulate data
+
+
+## Functionality
+
+- Upon opening the application, user is greeted and will see all recipes displayed. User may click on any recipe for more details such as instructions, ingredients, and cost of ingredients.
+![Main Page](src/assets/main-page.gif)
+
+- User is able to add a recipe to favorites or to a list or recipes to cook, either on the detailed recipe section, or on the main page.  User may then click on *My Favorite Recipes* or *My Recipes to Cook* to view their saved recipes.
+![Favorite/To Cook](src/assets/Favorite.gif)
+
+- User may also search for a recipe by name or by ingredient. They may also filter by recipe type and can clear these filters to see all recipes displayed.
+![Search/Filter](src/assets/search_filter.gif)
+
+
+## Future Additions
+- *User login* functionality to save favorite recipes to local storage
+- *User Pantry* functionality to determine whether a user's pantry has enough ingredients to cook a recipe or what they need to add to their grocery list
+- *Create a Recipe* form for user to create their own recipe and save it to the list of recipes
+- *Share Recipe* option to share a recipe to social media or email to a friend
+
+**[Back to top](#table-of-contents)**
+
+## Instructions for Running Project Locally
+
+1. Clone down this [repository]()
+2. `cd` into the repository in your terminal
+3. Run `npm install` to install all dependencies
 4. Run `npm start` and visit `localhost:8080`
-5. Make sure both members of your team are collaborators on the forked repo.
 
-## Testing 
+### Want to contribute?
+If you would like to contribute, please fork this repository and clone it down to your local machine. Once you've successfully implemented the changes in code necessary for your intended contribution without changing any of the current functionality of main, submit a pull request for author to review the changes.
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran npm install, then the tooling you need to start testing is already installed (mocha and chai).
+## Technologies Used
 
-## Linting Your Code 
+- HTML
+- CSS
+- JavaScript
+- Webpack
+- ESLint
+- Mocha
+- Chai
 
-Run the command in your terminal npm run lint to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
 
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+## Contributors
+#### Authors
+- [Sarah Fitz](https://github.com/sme93)
+- [Rachael Carroll](https://github.com/rachaelcarroll)
 
+#### Project Manager
+- [Hannah Hudson](https://github.com/hannahhch), a Mod2 frontend instructor
+
+**************************************************************************
+
+**[Back to top](#table-of-contents)**
