@@ -171,8 +171,12 @@ function displayRecipe(matchingRecipe) {
   const matchingRecipeIng = matchingRecipe.returnIngredients(ingredients);
   const formattedIngredients = matchingRecipeIng.map(ingredient => {
     // eslint-disable-next-line max-len
-    return `${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`
-  }).join('...');
+    return `<br><strong>${ingredient.name}</strong> - ${ingredient.quantity.amount} ${ingredient.quantity.unit}</br>`
+  }).join('');
+  const matchingRecipeInst = matchingRecipe.returnInstructions()
+  const formattedInstructions = matchingRecipeInst.map(instruction => {
+    return `<br><em>Step</em> ${instruction}</br>`
+  }).join('')
   recipeModal.innerHTML = `
         <article class='modal-content' id='${matchingRecipe.id}'>
           <img id='closeModal' src=${CLOSE_ICON} class='x-icon'/>
@@ -203,7 +207,7 @@ function displayRecipe(matchingRecipe) {
             <h3 class='instructions-header'>Instructions:</h3>
             <p
               class='instructions'
-              id='instructions'>${matchingRecipe.returnInstructions()}</p>
+              id='instructions'>${formattedInstructions}</p>
           <div class='modal-icons'>
             <div class='favorite-heart' id='favoriteHeart'>
               <img

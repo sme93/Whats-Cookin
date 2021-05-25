@@ -39,7 +39,7 @@ describe('Recipe', () => {
     expect(recipe.tags).to.equal(recipeData[0].tags);
   });
 
-  it('should be able to calulate the cost of a recipe', () => {
+  it('should be able to calculate the cost of a recipe', () => {
     const recipeCost = recipe.calculateCost(ingredientsData);
 
     expect(recipeCost).to.equal('$59.21');
@@ -56,15 +56,10 @@ describe('Recipe', () => {
     });
   });
 
-  it('should be able to return the instructions to the recipe', () => {
+  it('should be able to return each instruction in the recipe', () => {
     const recipeInstructions = recipe.returnInstructions();
 
-    expect(recipeInstructions).to.contain('1. In a large mixing bowl,');
+    expect(recipeInstructions.length).to.equal(6);
   });
 
-  it('should be able to return the instructions as one string', () => {
-    const recipeInstructions = recipe.returnInstructions();
-
-    expect(recipeInstructions).to.contain(' 350 degrees.. 4. Place the cookie');
-  });
 });
