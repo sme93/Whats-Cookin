@@ -44,7 +44,7 @@ To solidify and demonstrate the understanding of:
 
 ## Instructions for Running Project Locally
 
-1. Clone down this [repository]()
+1. Clone down this [repository](https://github.com/sme93/Whats-Cookin)
 2. `cd` into the repository in your terminal
 3. Run `npm install` to install all dependencies
 4. Run `npm start` and visit `localhost:8080`
