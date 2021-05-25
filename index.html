@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <title>Rosemary & Sage</title>
+</head>
+<body>
+  <nav class='nav-bar' id='navBar'>
+    <div class='greeting-header'>
+      <img src='https://static.vecteezy.com/system/resources/thumbnails/001/976/891/small/rosemary-icon-doodle-hand-drawn-or-outline-icon-style-vector.jpg' alt="rosemary-icon" class='welcome-icon'/>
+      <h2 class='user-greeting' id='userGreeting'></h2>
+    </div>
+    <div class='nav-buttons'>
+        <button class='my-favorites' id='myFavoriteRecipes'>My Favorite Recipes</button>
+        <button class='recipes-to-cook' id='recipesToCook'>My Recipes To Cook</button>
+    </div>
+  </nav>
+  <section class='main-header'>
+    <h1 class='header' id='header'>Rosemary & Sage</h1>
+    <h2 class='sub-header' id='subheader'>A Recipe Collection</h2>
+  </section>
+  <main class='main-page' id='mainPage'>
+    <section class='modal' id='modal'>
+    </section>
+    <section class='all-recipes' id='allRecipes'>
+    </section>
+    <aside class='filter-section' id='filterSection'>
+      <input type='search' placeholder='Search for a Recipe or Ingredient' class='search-bar' id='searchBar'>
+      <p class='filter-by-tag'>Filter Recipes By Type:</p>
+      <form id='recipeTags'>
+      </form>
+    </aside>
+  </main>
+  <script type="text/javascript" src="Recipe.js"></script>
+  <script type="text/javascript" src="User.js"></script>
+  <script type="text/javascript" src="RecipeCollection.js"></script>
+  <script type="text/javascript" src="scripts.js"></script>
+<script src="main.bundle.js"></script></body>
+</html>
