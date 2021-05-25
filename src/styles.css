@@ -159,6 +159,11 @@ h2 {
   gap: 1rem;
 }
 
+.no-recipes {
+  text-align: center;
+  width: 342px;
+  margin-left: 20px;
+}
 /* RECIPE CARD */
 
 .recipe-card {
@@ -226,7 +231,7 @@ h2 {
   flex-direction: column;
   background-color: #fefefe;
   margin: 15% auto;
-  padding: 20px;
+  padding: 25px;
   border: 1px solid #888;
   width: 60%;
   height: 80%;
@@ -244,7 +249,7 @@ h2 {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  margin: 30px;
+  margin: 38px;
   font-size: 32px;
 }
 
@@ -274,6 +279,10 @@ h2 {
 
 .modal-cost {
   display: flex;
+}
+
+.total-cost {
+  margin-top: 21px;
 }
 
 .modal-icons {
