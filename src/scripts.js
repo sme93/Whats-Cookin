@@ -173,7 +173,6 @@ function displayRecipe(matchingRecipe) {
     // eslint-disable-next-line max-len
     return `${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`
   }).join('...');
-  console.log(formattedIngredients)
   recipeModal.innerHTML = `
         <article class='modal-content' id='${matchingRecipe.id}'>
           <img id='closeModal' src=${CLOSE_ICON} class='x-icon'/>
