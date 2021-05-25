@@ -62,4 +62,9 @@ describe('Recipe', () => {
     expect(recipeInstructions.length).to.equal(6);
   });
 
+  it('should be able to return the instructions as an array', () => {
+    const recipeInstructions = recipe.returnInstructions();
+
+    expect(recipeInstructions).to.be.an('array');
+  });
 });
