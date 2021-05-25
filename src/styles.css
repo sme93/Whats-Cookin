@@ -1,6 +1,3 @@
-/* COLOR PALETTE */
-/* light grey:
-grey: */
 
 html {
   height: 100vh;
@@ -14,6 +11,7 @@ body {
   height: 100vh;
   width: 100%;
 }
+
 /* REMOVE DEFAULT BUTTON STYLES */
 button {
   background: transparent;
@@ -45,8 +43,8 @@ button:focus {
 /* BUTTON STYLES */
 
 .button {
-  padding: 4px;
-  margin-left: 24px;
+  padding: 9px;
+  margin-top: 10px;
   font-size: 16px;
   font-family: "Playfair Display", serif;
   text-transform: uppercase;
@@ -151,7 +149,8 @@ h2 {
 }
 
 .all-recipes {
-  margin: 40px;
+  overflow-y: scroll;
+  margin: 0px 40px 70px 40px;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: minmax(200px, 1fr) 1rem minmax(200px, 1fr) 1rem
@@ -288,6 +287,11 @@ h2 {
   padding: 10px;
 }
 /* ASIDE */
+
+.filter-by-tag {
+  font-style: italic;
+  font-size: 18px
+}
 
 .filter-section {
   border-left: 3px solid #3cb371;
