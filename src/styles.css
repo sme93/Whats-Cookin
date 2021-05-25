@@ -262,7 +262,7 @@ h2 {
   flex-direction: row;
   font-size: 32px;
   justify-content: space-around;
-  margin: 38px;
+  margin: 30px;
 }
 
 .modal-img {
@@ -321,6 +321,8 @@ h2 {
 .add-to-cook,
 .favorite-heart {
   padding: 16px;
+  min-height: 62px;
+  min-width: 50px;
 }
 
 /* ASIDE */
