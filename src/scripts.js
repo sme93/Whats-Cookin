@@ -62,19 +62,19 @@ function renderRecipes(recipes) {
     const favoriteClass = isFavorite ? 'active' : '';
     return ` <article id=${recipe.id}>
         <div class='recipe-card'>
-          <img src=${recipe.image} class='recipe-img'>
+          <img src=${recipe.image} class='recipe-img' alt='${recipe.name}'>
           <section class='recipe-card-bottom' id='recipeCardBottom'>
             <div class='favorite-heart' id='favoriteHeart'>
               <img
                 src=${HEART_ICON}
                 class='favorite-icon ${favoriteClass}'
-                id='favoriteIcon'/>
+                id='favoriteIcon' alt='heart icon'/>
             </div>
             <div class='add-to-cook' id='addToCook'>
               <img
                 src=${PLUS_ICON}
                 class='add-to-cook-icon'
-                id='addToCookIcon'>
+                id='addToCookIcon' alt='plus icon'>
             </div>
           </section>
             <div class='view-recipe-text' id='viewRecipeText'>
@@ -188,7 +188,23 @@ function displayRecipe(matchingRecipe) {
   }).join('')
   recipeModal.innerHTML = `
         <article class='modal-content' id='${matchingRecipe.id}'>
-          <img id='closeModal' src=${CLOSE_ICON} class='x-icon'/>
+        <div class='x'>
+          <div class='modal-icons'>
+           <div class='favorite-heart' id='favoriteHeart'>
+            <img
+              src=${HEART_ICON}
+              class='favorite-icon ${favoriteClass}'
+              id='favoriteIcon' alt='heart-icon'/>
+           </div>
+           <div class='add-to-cook' id='addToCook'>
+            <img
+              src=${PLUS_ICON}
+              class='add-to-cook-icon'
+              id='addToCookIcon' alt='plus-icon'/>
+           </div>
+          </div>
+         <img id='closeModal' src=${CLOSE_ICON} class='x-icon'/>
+        </div>
           <div class='modal-header'>
             <img
               id="modalImg"
@@ -199,39 +215,31 @@ function displayRecipe(matchingRecipe) {
               class='modal-header'
               id='modalHeader'>${matchingRecipe.name}</h2>
           </div>
-          <article class='modal-details' id='modalDetails'>
+        <div class='modal-details'>
+          <article class='all-modal-ing'>
            <div class='modal-ingredients'>
             <h3 class='ingredient-header'>Ingredients:</h3>
-            <p
+              <p
               class='ingredients'
               id='recipeIngredients'>${formattedIngredients}</p>
            </div>
            <div class='modal-cost'>
             <h3 class='cost-header'>Cost of Ingredients:</h3>
-            <p
+              <p
               class='total-cost'
               id='totalCost'>${matchingRecipe.calculateCost(ingredients)}</p>
-           <div class='modal-cost'>
+           </div>
           </article>
+          <article class='modal-instructions'>
+           <div class='instructions-div'>
             <h3 class='instructions-header'>Instructions:</h3>
-            <p
-              class='instructions'
-              id='instructions'>${formattedInstructions}</p>
-          <div class='modal-icons'>
-            <div class='favorite-heart' id='favoriteHeart'>
-              <img
-                src=${HEART_ICON}
-                class='favorite-icon ${favoriteClass}'
-                id='favoriteIcon'/>
-            </div>
-            <div class='add-to-cook' id='addToCook'>
-              <img
-                src=${PLUS_ICON}
-                class='add-to-cook-icon'
-                id='addToCookIcon'/>
-            </div>
-          </div>
-        <article>`
+              <p
+             class='instructions'
+             id='instructions'>${formattedInstructions}</p>
+           </div>
+          </article>
+         </div>
+       </article>`
   openModal();
 }
 
