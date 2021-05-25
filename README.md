@@ -1,4 +1,4 @@
-# Rosemary & Sage
+# *Rosemary & Sage*
 
 ### Table of Contents
 - [Overview](#overview-and-project-goals)
