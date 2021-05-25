@@ -178,7 +178,6 @@ function displayRecipe(matchingRecipe) {
   const favoriteClass = isFavorite ? 'active' : '';
   const matchingRecipeIng = matchingRecipe.returnIngredients(ingredients);
   const formattedIngredients = matchingRecipeIng.map(ingredient => {
-    // eslint-disable-next-line max-len
     return `<br><strong>${ingredient.name}</strong> - ${ingredient.quantity.amount} ${ingredient.quantity.unit}</br>`
   }).join('');
   const matchingRecipeInst = matchingRecipe.returnInstructions()
